@@ -1,0 +1,172 @@
+﻿<form [formGroup]="promoterForm" (ngSubmit)="save()" novalidate>
+    <div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableHead"><b>{{title}} Promoter</b></div>
+                <div class="divTableHead"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Name</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="name" [(ngModel)]=query (keyup)=filter($event) />
+                    <div class="suggestions" *ngIf="filteredList.length > 0 && query.length>2">
+                        <ul *ngFor="let item of filteredList;let idx=index">
+                            <li [class.complete-selected]="idx == selectedIdx">
+                                <a (click)="select(item)">{{item.name}} , {{item.officeAddress}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <span style="color: red;" *ngIf="name.invalid && (name.dirty || submitted)">
+                        <label *ngIf="name.errors.required">
+                            Promoter Name is required
+                        </label>
+                    </span>
+
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Name Change (if any)</div>
+                <div class="divTableCell_2"><input type="text" formControlName="changedName" /></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Date of Name Change</div>
+                <div class="divTableCell_2">
+                    <!--<input type="text" formControlName="changedNameDate" />-->
+                    <my-date-picker name="changedNameDate" [options]="myDatePickerOptions" placeholder="select Date"
+                                    (dateChanged)="onDateChanged($event)" formControlName="changedNameDate"></my-date-picker>
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">CIN Number</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="cin">
+                    <!--<span style="color: red;" *ngIf="cin.invalid && (cin.dirty || submitted)">
+                        <label *ngIf="cin.errors.required">
+                            CIN is required
+                        </label>
+                    </span>-->
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Address of registered Office</div>
+                <div class="divTableCell_2">
+                    <textarea rows="2" formControlName="officeAddress"></textarea>
+                    <!--<span style="color: red;" *ngIf="officeAddress.invalid && (officeAddress.dirty || submitted)">
+                        <label *ngIf="officeAddress.errors.required">
+                            Address is required
+                        </label>
+                    </span>-->
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">PAN Number</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="pan" />
+                    <!--<span style="color: red;" *ngIf="pan.invalid && (pan.dirty || submitted)">
+                        <label *ngIf="pan.errors.required">
+                            PAN is required
+                        </label>
+                    </span>-->
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Date of Incorporation</div>
+                <div class="divTableCell_2">
+                    <!--<input type="text" formControlName="incorporationDate" />-->
+                    <my-date-picker name="incorporationDate" [options]="myDatePickerOptions" placeholder="Select Incorporation Date"
+                                    (dateChanged)="onDateChanged($event)" formControlName="incorporationDate"></my-date-picker>
+                    <!--<span style="color: red;" *ngIf="incorporationDate.invalid && (incorporationDate.dirty || submitted)">
+                        <label *ngIf="incorporationDate.errors.required">
+                            incorporationDate is required
+                        </label>
+                    </span>-->
+
+                </div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">Do you want to add it as Main Promoter ?</div>
+                <div class="divTableCell_2">
+                    <input type="checkbox" (change)="onCheckboxChange($event.target.checked)" formControlName="chkPromoter" />
+                </div>
+            </div>
+            <input type="hidden" formControlName="isMainPromoter" />
+
+            <!--<div *ngIf="promoterId > 0" class="divTableRow_2">
+                <div class="divTableCell">Director</div>
+                <div class="divTableCell_2">
+                    <label for="Director">Click here to Add</label>
+                    <button title="Add Director" class=" btn-xs btn-success" name="Add Director" (click)="addDirector(associationtype,promoterId)">
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </button>
+                    <table>
+                        <tr *ngFor="let director of directors;let i=index">
+                            <td>
+                                <div class="divTableCell_2">
+                                    <input type="text" readonly value="{{director.name}}" style="margin-left:-10px" />
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div *ngIf="promoterId > 0" class="divTableRow">
+                <div class="divTableCell">Authorized Person</div>
+                <div class="divTableCell_2">
+                    <label for="Authorized Person">Click here to Add</label>
+                    <button title="Add Authorized Person" class=" btn-xs btn-success" name="Add Authorized Person" (click)="addAuthorizedPerson(associationtype,promoterId)">
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </button>
+                    <table>
+                        <tr *ngFor="let authorisedperson of authorisedpersons;let i=index">
+                            <td>
+                                <div class="divTableCell_2">
+                                    <input type="text" readonly value="{{authorisedperson.name}}" style="margin-left:-10px" />
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div *ngIf="promoterId > 0" class="divTableRow_2">
+                <div class="divTableCell">Shareholder</div>
+                <div class="divTableCell_2">
+                    <label for="Shareholder">Click here to Add</label>
+                    <button title="Add Shareholder" class=" btn-xs btn-success" name="Add Shareholder" (click)="addShareholder(associationtype,promoterId)">
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </button>
+                    <table>
+                        <tr *ngFor="let shareholder of shareholders;let i=index">
+                            <td>
+                                <div class="divTableCell_2">
+                                    <input type="text" readonly value="{{shareholder.name}}" style="margin-left:-10px" />
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>-->
+
+            <div class="divTableRow">
+                <div class="divTableCell"></div>
+                <div class="divTableCell_2">
+                    <input type="submit"
+                           class="btn btn-primary"
+                           value="Save" />&nbsp;<input type="button" class="btn btn-warning" value="Cancel" (click)="cancel()" />
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">      </div>
+                <div class="divTableCell_2"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">    </div>
+                <div class="divTableCell_2"></div>
+            </div>
+
+        </div>
+    </div>
+</form>
+

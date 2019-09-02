@@ -1,0 +1,17 @@
+﻿<header class="main-header" style="position:fixed;width:100%;border-bottom:3px solid #1f5463;">
+    <nav class="navbar navbar-static-top">
+        <div class="container" style="text-align:center;">
+            <div class="navbar-header" style="position:relative;left:-39px;">
+                <img src="app/images/header.png" alt="header Image" />
+                <a href="#menu-toggle" id="menu-toggle">
+                    <i class="fa fa-bars " style="font-size:20px !Important;color:#a31d21;" aria-hidden="true"></i>
+                </a>
+            </div>
+            <div class="navbar-custom-menu">
+                <span class="hidden-xs"> <b>Hello ! {{activeUser}}  &nbsp;&nbsp;</b></span>
+                <div class="navbar navbar-right "> <span class="hidden-xs right-side"> <b><a style="color:#a31d21" routerLink="/" (click)="Logout()">Logout</a></b></span></div>
+            </div>
+
+        </div>
+    </nav>
+</header>

@@ -1,0 +1,121 @@
+﻿<form [formGroup]="lenderForm" (ngSubmit)="save()" novalidate>
+    <div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableHead"><b>Add Lender</b></div>
+                <div class="divTableHead"></div>
+            </div>
+            <ng-progress></ng-progress>
+            <div class="alert-danger">{{errorMessage}}</div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">Name</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="lenderName" />
+                    <span style="color: red;" *ngIf="lenderName.invalid && (lenderName.dirty || submitted)">
+                        <label *ngIf="lenderName.errors.required">
+                            Lender Name is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Address</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="lenderAddress" />
+                    <span style="color: red;" *ngIf="lenderAddress.invalid && (lenderAddress.dirty || submitted)">
+                        <label *ngIf="lenderAddress.errors.required">
+                            Lender Address is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell"></div>
+                <div class="divTableCell_2">
+                    <input type="submit"
+                           class="btn btn-primary"
+                           value="Save" />&nbsp;<input type="button" class="btn btn-warning" value="Cancel" (click)="cancel()" />
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">      </div>
+                <div class="divTableCell_2"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">    </div>
+                <div class="divTableCell_2"></div>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+<div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;" *ngIf="lenders.length >0">
+
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableHead"><b>Lender List</b></div>
+            <div class="divTableHead"></div>
+        </div>
+
+        <div class="divTableBody">
+
+            <div style="margin:20px;">
+                <div class="alert-danger">{{errorMessage}}</div>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="search" [(ngModel)]="search"
+                           aria-describedby="basic-addon1">
+                    <span class="input-group-addon" id="basic-addon1">Search</span>
+                </div>
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr *ngIf="lenders.length >0">
+                            <th (click)="setOrder('lenderName')">
+                                Lender Name
+                                <span class="glyphicon sort-icon" *ngIf="order =='lenderName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+
+                            <th (click)="setOrder('lenderAddress')">
+                                Lender Address
+                                <span class="glyphicon sort-icon" *ngIf="order =='lenderAddress'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+                            
+                            <th *ngIf="activeuserdesignation!='Supervisor'">Select</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr  (click)="setactive(lender)" *ngFor="let lender of lenders| filter: search | orderBy: order:reverse:'case-insensitive';">
+                            <td>{{lender.lenderName }}</td>
+                            <td>{{lender.lenderAddress }}</td>
+                            <td style="width: 70px;" *ngIf="activeuserdesignation!='Supervisor'">
+                                <i class="glyphicon glyphicon-edit pointer fa-lg"
+                                   (click)="edit(lender)" title="Edit"></i>
+                            </td>
+                        </tr>
+                        <tr *ngIf="!lenders || lenders.length==0">
+                            <td colspan="7">No Lenders Available..............</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="divTableRow">
+                    <div class="divTableCell">      </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+                <div class="divTableRow">
+                    <div class="divTableCell">    </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>

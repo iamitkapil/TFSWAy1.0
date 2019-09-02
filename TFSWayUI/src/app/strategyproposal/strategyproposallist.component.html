@@ -1,0 +1,147 @@
+﻿<div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableHead"><b>Strategy Proposal List</b></div>
+            <div class="divTableHead"></div>
+        </div>
+
+        <div class="divTableBody">
+            <div style="margin:20px;">
+                <button class="btn btn-success btn-circle pull-right" (click)="add()" title="Add Strategy Proposal">
+                    <i class="glyphicon glyphicon-plus"></i>
+                </button>
+                <div *ngIf="strategyproposals.length > 0">
+                    <button class="btn btn-success btn-circle pull-right" (click)="ExportToExcel()" title="Export to Excel">
+                        <i class="glyphicon glyphicon-export"></i>
+                    </button>
+                    <button class="btn btn-success btn-circle pull-right" (click)="ExportToMSWord()" title="Export to MSWord">
+                        <i class="glyphicon glyphicon-text-background"></i>
+                    </button>
+                </div>
+                <ng-progress></ng-progress>
+                <div class="alert-danger">{{errorMessage}}</div>
+
+                <div class="input-group" *ngIf="strategyproposals.length > 0">
+                    <input type="text" class="form-control" name="search" [(ngModel)]="search"
+                           aria-describedby="basic-addon1">
+                    <span class="input-group-addon" id="basic-addon1">Search</span>
+                </div>
+                <div id="exportgrid">
+                    <table class="table table-bordered">
+                        <thead class="thead-inverse">
+                            <tr *ngIf="strategyproposals.length >0">
+                                <th (click)="setOrder('ppaTerminationClause')">
+                                    Termination Clause
+                                    <span class="glyphicon sort-icon" *ngIf="order =='ppaTerminationClause'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+
+                                <th (click)="setOrder('ppaLiquidatedDamages')">
+                                    Liquidated Damages
+                                    <span class="glyphicon sort-icon" *ngIf="order =='ppaLiquidatedDamages'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+
+                                <th (click)="setOrder('ppaPaymentmechanism')">
+                                    Payment Mechanism
+                                    <span class="glyphicon sort-icon" *ngIf="order =='ppaPaymentmechanism'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+
+                                <th (click)="setOrder('experienceinRelSec')">
+                                    Exp. in Relevant Sector
+                                    <span class="glyphicon sort-icon" *ngIf="order =='experienceinRelSec'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+
+                                <th (click)="setOrder('financialStrenth')">
+                                    Financial Strength
+                                    <span class="glyphicon sort-icon" *ngIf="order =='financialStrenth'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+
+                                <th (click)="setOrder('indicativeEquityArrangement')">
+                                    Indicative Equity Arrangement
+                                    <span class="glyphicon sort-icon" *ngIf="order =='indicativeEquityArrangement'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+
+                                <th (click)="setOrder('prevRelationwithLender')">
+                                    Previous Rel with Vendor
+                                    <span class="glyphicon sort-icon" *ngIf="order =='prevRelationwithLender'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+
+                                <th (click)="setOrder('tenure')">
+                                    Tenure
+                                    <span class="glyphicon sort-icon" *ngIf="order =='tenure'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+
+
+                                <th (click)="setOrder('status')">
+                                   Status
+                                    <span class="glyphicon sort-icon" *ngIf="order =='tenure'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+
+                                <th *ngIf="activeuserdesignation!='Supervisor'">Action</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <tr (click)="view(strategyproposal.strategyProposalId)" *ngFor="let strategyproposal of strategyproposals| filter: search | orderBy: order:reverse:'case-insensitive';">
+                                <td>{{strategyproposal.ppaTerminationClause }}</td>
+                                <td>{{strategyproposal.ppaLiquidatedDamages }}</td>
+                                <td>{{strategyproposal.ppaPaymentmechanism}}</td>
+                                <td>{{strategyproposal.experienceinRelSec}}</td>
+                                <td>{{strategyproposal.financialStrenth}}</td>
+                                <td>{{strategyproposal.indicativeEquityArrangement}}</td>
+                                <td>{{strategyproposal.prevRelationwithLender}}</td>
+                                <td>{{strategyproposal.tenure}}</td>
+                                <td>{{strategyproposal.status}}</td>
+
+
+                                <td style="width: 70px;" *ngIf="activeuserdesignation!='Supervisor' && strategyproposal.status == 'Created'">
+                                    <i class="glyphicon glyphicon-edit pointer fa-lg"
+                                       (click)="edit(strategyproposal.strategyProposalId)" title="Edit"></i>
+                                </td>
+                            </tr>
+                            <tr *ngIf="!strategyproposals || strategyproposals.length==0">
+                                <td colspan="7">No strategyproposals Available..............</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <table cellspacing="7">
+                    <tr>
+                        <td>
+                            <div>
+                                <ul *ngIf="pager.pages && pager.pages.length" class="pagination pagination-sm">
+                                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                        <a (click)="setPage(1)"> First </a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                        <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                                    </li>
+                                    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                                        <a (click)="setPage(page)">{{page}}</a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                        <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                        <a (click)="setPage(pager.totalPages)">Last</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+
+                    </tr>
+
+                </table>  
+                <div class="divTableRow">
+                    <div class="divTableCell">      </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+                <div class="divTableRow">
+                    <div class="divTableCell">    </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+

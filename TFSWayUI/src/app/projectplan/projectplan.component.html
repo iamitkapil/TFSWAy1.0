@@ -1,0 +1,239 @@
+﻿<div style="width:100%;margin-top:5px;"> <b>Group Name :</b>{{groupName}} &nbsp; &nbsp;  <i class="glyphicon glyphicon-arrow-right"></i> &nbsp; <b>Company Name :</b>{{companyName}} &nbsp; &nbsp;  <i class="glyphicon glyphicon-arrow-right"></i>  &nbsp; <b>Project Name :</b>{{projectName}} &nbsp; &nbsp;   </div>
+<form [formGroup]="projectplanForm" (ngSubmit)="save()" novalidate>
+    <div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;" *ngIf="AddMorePlan">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableHead"><b>{{title}} Activities</b></div>
+                <div class="divTableHead"></div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">Stage</div>
+                <div class="divTableCell_2">
+                    <select palceholder="Select" (change)="onStageChange($event.target)" formControlName="parentID" style="width:160px;height:23px;">
+                        <option *ngFor="let stage of stages" value={{stage.templateID}}>{{stage.activity}}</option>
+                    </select>
+
+                    <span style="color: red;" *ngIf="parentID.invalid && (parentID.dirty || submitted)">
+                        <label *ngIf="parentID.errors.required">
+                            Stage is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="divTableRow" *ngIf="!isOtherActivity">
+                <div class="divTableCell">Activities</div>
+                <div class="divTableCell_2">
+                    <select palceholder="Select" (change)="onActivitiesChange($event.target)" formControlName="activity" style="width:160px;height:23px;">
+                        <option *ngFor="let activity of activityList" value={{activity.activityID}}>{{activity.activity}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="divTableRow" *ngIf="isOtherActivity">
+                <div class="divTableCell">Other Activities</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="otherActivity" />
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Dependency</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="dependency" />
+                    <span style="color: red;" *ngIf="dependency.invalid && (dependency.dirty || submitted)">
+                        <label *ngIf="dependency.errors.required">
+                            Dependency is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Start Date</div>
+                <div class="divTableCell_2">
+                    <my-date-picker name="StartDate" [options]="myDatePickerOptions" placeholder="select start date"
+                                    (dateChanged)="onDateChanged($event)" formControlName="startDate" required></my-date-picker>
+
+                    <span style="color: red;" *ngIf="startDate.invalid && (startDate.dirty || submitted)">
+                        <label *ngIf="startDate.errors.required">
+                            Start Date is required
+                        </label>
+                        <label *ngIf="startDate.errors.startDateIssue">
+                            Start Date can not less than Project Start Date
+                        </label>
+                        <!--<label *ngIf="startDate.errors.endDatesCompareIssue">
+                            Start Date can not greater than End Date
+                        </label>-->
+                        <label *ngIf="startDate.errors.startDepDateIssue">
+                            Activity can not start before depenedent Start Date
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">End Date</div>
+                <div class="divTableCell_2">
+                    <my-date-picker name="EndDate" [options]="myDatePickerOptions" placeholder="select end date"
+                                    (dateChanged)="onEndDateChanged($event)" formControlName="endDate" required></my-date-picker>
+
+                    <span style="color: red;" *ngIf="endDate.invalid && (endDate.dirty || submitted)">
+                        <label *ngIf="endDate.errors.required">
+                            End Date is required
+                        </label>
+                        <label *ngIf="endDate.errors.endDateIssue">
+                            End Date can not greater than Project End Date
+                        </label>
+                        <label *ngIf="endDate.errors.startDatesCompareIssue">
+                            End Date can not Less than Start Date
+                        </label>
+                        <label *ngIf="endDate.errors.endDepDateIssue">
+                            Activity can not finish before dependent End Date
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <input type="hidden" formControlName="projectPlanID" />
+            <div class="divTableRow">
+                <div class="divTableCell"></div>
+                <div class="divTableCell_2">
+                    <input type="submit"
+                           class="btn btn-primary"
+                           value="Save" />&nbsp;<input type="button" class="btn btn-warning" value="Cancel" (click)="cancel()" />
+                    <input type="button" class="btn btn-warning" value="Reset" (click)="reset()" />
+                </div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">      </div>
+                <div class="divTableCell_2"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">    </div>
+                <div class="divTableCell_2"></div>
+            </div>
+
+        </div>
+    </div>
+    <div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;" *ngIf="(isSubmitted && isAdmin) || (isAdmin && isApproved)">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableCell">Comment</div>
+                <div class="divTableCell_2">
+                    <textarea class="form-control" rows="2" formControlName="reason"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;" *ngIf="projectplans.length > 0">
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableHead"><b>Project Activity Plan</b></div>
+            <div class="divTableHead"></div>
+        </div>
+
+        <div class="divTableBody">
+            <div style="margin:20px;">
+                <div *ngIf="projectplans.length > 0">
+                    <button class="btn btn-success btn-circle pull-right" *ngIf="isCreated && !isAdmin" (click)="add()" title="Add Activities">
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </button>
+                    <button class="btn btn-success btn-circle pull-right" (click)="ExportToExcel()" title="Export to Excel">
+                        <i class="glyphicon glyphicon-export"></i>
+                    </button>
+                </div>
+                <ng-progress></ng-progress>
+                <div class="alert-danger">{{errorMessage}}</div>
+
+                <div class="input-group" *ngIf="projectplans.length > 0">
+                    <input type="text" class="form-control" name="search" [(ngModel)]="search"
+                           aria-describedby="basic-addon1">
+                    <span class="input-group-addon" id="basic-addon1">Search</span>
+
+                </div>
+
+                <div id="exportgrid">
+                    <table class="table table-bordered">
+                        <thead class="thead-inverse">
+                            <tr *ngIf="projectplans.length >0">
+                                <th>
+                                    Sr. No.
+                                    <span></span>
+                                </th>
+                                <th>
+                                    Steps Of Project financing
+                                </th>
+                                <th>
+                                    Dependency
+                                </th>
+
+                                <th>
+                                    Start Date
+                                </th>
+
+                                <th>
+                                    End Date
+                                </th>
+
+                                <th>
+                                    Delay
+                                </th>
+
+                                <th *ngIf="isCreated && !isAdmin">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr *ngFor="let projectplan of projectplans| filter: search">
+                                <td valign="top">{{projectplan.srNo}}</td>
+                                <td valign="top" [ngClass]="{'font-bold': projectplan.parentID == 0 }">{{projectplan.activity}}</td>
+                                <td valign="top">{{projectplan.dependency}}</td>
+                                <td valign="top" [ngClass]="{'font-bold': projectplan.parentID == 0 }">{{projectplan.startDate | date}}</td>
+                                <td valign="top" [ngClass]="{'font-bold': projectplan.parentID == 0 }">{{projectplan.endDate | date}}</td>
+                                <td valign="top">{{delay(projectplan.delay)}}</td>
+                                <td style="width: 70px;" *ngIf="isCreated && !isAdmin">
+                                    <i class="glyphicon glyphicon-trash pointer fa-lg" *ngIf="projectplan.parentID != 0"
+                                       (click)="delete(projectplan.projectPlanID)" title="Delete"></i>
+                                </td>
+                            </tr>
+                            <tr *ngIf="!projectplans || projectplans.length==0">
+                                <td colspan="7">Project Plan not available</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align:center;margin-top:20px;">
+            <input type="button"
+                   class="btn btn-primary"
+                   value="Submit" *ngIf="isCreated && !isAdmin" (click)="submit()" />
+            <input type="button"
+                   class="btn btn-primary"
+                   value="Approve" *ngIf="isSubmitted && isAdmin" (click)="approve()" />
+            <input type="button"
+                   class="btn btn-primary"
+                   value="Reject" *ngIf="isSubmitted && isAdmin" (click)="reject()" />
+            <input type="button" class="btn btn-primary" value="ReOpen" *ngIf="isAdmin && isApproved" (click)="reopen()" />
+            &nbsp;<input type="button" class="btn btn-warning" value="Cancel" (click)="cancel()" />
+        </div>
+
+    </div>
+</div>
+<div class="divTableRow">
+    <div class="divTableCell">      </div>
+    <div class="divTableCell_2"></div>
+</div>
+<div class="divTableRow">
+    <div class="divTableCell">    </div>
+    <div class="divTableCell_2"></div>
+</div>
+
+
+
+
+

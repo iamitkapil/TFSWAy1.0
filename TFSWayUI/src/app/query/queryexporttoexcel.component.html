@@ -1,0 +1,76 @@
+﻿<div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableHead"><b>ExportToExcel List</b></div>
+            <div class="divTableHead"></div>
+        </div>
+
+        <div class="divTableBody">
+            <div style="margin:20px;">
+
+
+                <div id="exporttoexcelgrid">
+                    <table class="table table-bordered" border="1" bordercolor="black" bordercollapse="collapse" style="border-collapse:collapse;" width="100%">
+                        <!--<thead>
+                        <tr *ngIf="queries.length >0">
+                            <th>
+                                Sr. No.
+                                <span></span>
+                            </th>
+
+                            <th>
+                                Query
+                            </th>
+
+                            <th>
+                                Reply
+                            </th>-->
+                        <!--<th>
+                            QueryType
+                        </th>
+
+                        <th>
+                            Severity
+                        </th>
+                        <th>
+                            Status
+                        </th>-->
+                        <!--<th>
+                            Reference Documnets
+                        </th>-->
+                        <!--</tr>
+                        </thead>-->
+                        <tbody>
+                            <tr *ngFor="let query of queries;let i=index">
+                                <td valign="top">{{i+1}} </td>
+                                <td valign="top">
+                                    <table border="1" width="100%">
+                                        <tr>
+                                            <td valign="top" [innerHTML]="query.queryText | SafeHtml"></td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" [innerHTML]="query.replytext | SafeHtml"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr *ngIf="!queries || queries.length==0">
+                                <td colspan="2">No Query is available</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="divTableRow">
+                    <div class="divTableCell">      </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+                <div class="divTableRow">
+                    <div class="divTableCell">    </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

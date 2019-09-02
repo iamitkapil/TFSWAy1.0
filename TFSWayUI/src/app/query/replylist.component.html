@@ -1,0 +1,71 @@
+﻿<div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableHead"><b>Reply List</b></div>
+            <div class="divTableHead"></div>
+        </div>
+
+        <div class="divTableBody">
+            <div style="margin:20px;">
+                <!--<button class="btn btn-success btn-circle pull-right" (click)="add()" title="Add Query/Reply">
+                    <i class="glyphicon glyphicon-plus"></i>
+                </button>-->
+
+                <ng-progress></ng-progress>
+                <div class="alert-danger">{{errorMessage}}</div>
+
+                <div class="input-group">
+                    <input type="text" class="form-control" name="search" [(ngModel)]="search"
+                           aria-describedby="basic-addon1">
+                    <span class="input-group-addon" id="basic-addon1">Search</span>
+                </div>
+
+                <table class="table table-bordered">
+                    <thead class="thead-inverse">
+                        <tr *ngIf="replies.length >0">
+                            <th>
+                                Query
+                            </th>
+
+                            <th>
+                                Reply
+                            </th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr *ngFor="let reply of replies| filter: search | orderBy: order:reverse:'case-insensitive';">
+                            <td><b>{{reply.queryDate | date: 'medium'}}&nbsp;:&nbsp;</b>{{reply.queryText}}</td>
+                            <td><b>{{ (reply.replyText!=""? (reply.replyDate | date: 'medium'):"") }}&nbsp;{{ (reply.replyText!=""? ":":"")}}&nbsp;</b>{{reply.replyText}}</td>
+                            <td style="width: 70px;" *ngIf="reply.replyText==''">
+                                <i class="glyphicon glyphicon-plus"
+                                   (click)="AddReply(reply.replyId)" title="Add Reply"></i>
+                            </td>
+                        </tr>
+                        <tr *ngIf="!replies || replies.length==0">
+                            <td colspan="7">Loading replies..............</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <div class="divTableRow">
+                    <div class="divTableCell"></div>
+                    <div class="divTableCell_2">
+                        <input type="button" class="btn btn-warning" value="Back" (click)="cancel()" />
+                    </div>
+                </div>
+                <div class="divTableRow">
+                    <div class="divTableCell">      </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+                <div class="divTableRow">
+                    <div class="divTableCell">    </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,77 @@
+﻿<div style="width:100%;margin-top:5px;"> <b>Group Name :</b>{{groupName}} &nbsp; &nbsp;  <i class="glyphicon glyphicon-arrow-right"></i> &nbsp; <b>Company Name :</b>{{companyName}} &nbsp; &nbsp;  <i class="glyphicon glyphicon-arrow-right"></i>  &nbsp; <b>Project Name :</b>{{projectName}} &nbsp; &nbsp;   </div>
+<div style="width:100%;border: 0px solid #aaa;margin-top:4px;">
+    <div class="row">
+
+
+        <div class="column">
+            <h4 style="text-align:center"> Project Status Report</h4>
+            <div style="display: block;">
+                <canvas height="150%" baseChart
+                        [datasets]="lineChartData"
+                        [labels]="lineChartLabels"
+                        [options]="lineChartOptions"
+                        [colors]="lineChartColors"
+                        [legend]="lineChartLegend"
+                        [chartType]="lineChartType"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="ApplicationchartClicked($event)"></canvas>
+            </div>
+
+        </div>
+        <div class="column" >
+            <h4 style="text-align:center">Activity Status Report</h4>
+            <div style="display: block;">
+                <canvas height="150%" baseChart
+                        [data]="pieChartData"
+                        [labels]="pieChartLabels"
+                        [chartType]="pieChartType"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="ActivitychartClicked($event)"></canvas>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+  
+        <div class="column" >
+            <h4 style="text-align:center">Document Status Report</h4>
+            <div style="display: block;">
+                <canvas height="150%" baseChart
+                        [data]="doughnutChartData"
+                        [labels]="doughnutChartLabels"
+                        [chartType]="doughnutChartType"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="DocumentchartClicked($event)"></canvas>
+
+            </div>
+
+        </div>
+        <div class="column" >
+            <h4 style="text-align:center">Query Status Report</h4>
+            <div style="display: block;">
+                <canvas height="150%" baseChart
+                        [data]="polarAreaChartData"
+                        [labels]="polarAreaChartLabels"
+                        [legend]="polarAreaLegend"
+                        [chartType]="polarAreaChartType"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="QuerychartClicked($event)"></canvas>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="divTableRow">
+        <div class="divTableCell">      </div>
+        <div class="divTableCell_2"></div>
+    </div>
+    <div class="divTableRow">
+        <div class="divTableCell">    </div>
+        <div class="divTableCell_2"></div>
+    </div>
+    <div class="divTableRow">
+        <div class="divTableCell">    </div>
+        <div class="divTableCell_2"></div>
+    </div>
+</div>

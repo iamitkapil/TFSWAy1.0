@@ -1,0 +1,361 @@
+﻿<form [formGroup]="strategyproposalForm" (ngSubmit)="save()" novalidate>
+    <div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableHead"><b>{{title}} Strategy Proposal</b></div>
+            </div>
+        </div>
+        <div class="divTableBody">
+            <div style="margin:20px;">
+                <button class="btn btn-success btn-circle pull-right" (click)="ExportToMSWord()" title="Export to MSWord">
+                    <i class="glyphicon glyphicon-print"></i>
+                </button>
+                <div id="exportgrid">
+                    <table width="100%" border="0" style="text-align:center">
+                        <tr>
+                            <td><b>STRATEGIC DOCUMENT</b></td>
+                        </tr>
+                        <tr>
+                            <td><i>{{project?.projectGroup}}</i></td>
+                        </tr>
+                    </table>
+                    <br />
+                    <br />
+                    <table width="100%" border="0" style="text-align:center">
+                        <tr>
+                            <td><b><u>Project Brief</u></b></td>
+                        </tr>
+                    </table>
+                    <br />
+                    <br />
+                    <table width="100%" border="1">
+                        <tr>
+                            <td width="30%">Project</td>
+                            <td>{{project?.projectName}}</td>
+                        </tr>
+                        <tr>
+                            <td>Capacity (AC:DC)</td>
+                            <td>{{project?.projectCapacityAC}} : {{project?.projectCapacityDC}}</td>
+                        </tr>
+                        <tr>
+                            <td>Location</td>
+                            <td>{{project?.projectLocation}}</td>
+                        </tr>
+                        <tr>
+                            <td>Total Cost</td>
+                            <td>{{project?.projectTotalCost}}</td>
+                        </tr>
+                        <tr>
+                            <td>Proposed Equity Structure</td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>Equity :</td>
+                                        <td>{{project?.projectEquity}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Debt :</td>
+                                        <td>{{project?.projectDebt}}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Financial Ratio</td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>IRR :</td>
+                                        <td>{{project?.projectIRR}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>DSCR :</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Average : {{project?.projectAvgDSCR}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Minimum : {{project?.projectMinDSCR}}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <br />
+                    <br />
+                    <table width="100%" border="0" style="text-align:center">
+                        <tr>
+                            <td><b><u>PPA Details</u></b></td>
+                        </tr>
+                    </table>
+                    <br />
+                    <br />
+                    <table width="100%" border="1">
+                        <tr>
+                            <td width="30%">DISCOM</td>
+                            <td>{{project?.projectDiscom}}</td>
+                        </tr>
+                        <tr>
+                            <td>Tarrif</td>
+                            <td>{{project?.projectTarrif}}</td>
+                        </tr>
+                        <tr>
+                            <td>SCOD</td>
+                            <td>{{project?.projectSCOD  | date: 'dd/MMM/yyyy' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Key Terms</td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>Termination Clause : </td>
+                                        <td>
+                                            <input type="text" formControlName="ppaTerminationClause" />
+                                            <span style="color: red;" *ngIf="ppaTerminationClause.invalid && (ppaTerminationClause.dirty || submitted)">
+                                                <label *ngIf="ppaTerminationClause.errors.required">
+                                                    Termination Clause  is required
+                                                </label>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Liquidated Damages : </td>
+                                        <td>
+                                            <input type="text" formControlName="ppaLiquidatedDamages" />
+                                            <span style="color: red;" *ngIf="ppaLiquidatedDamages.invalid && (ppaLiquidatedDamages.dirty || submitted)">
+                                                <label *ngIf="ppaLiquidatedDamages.errors.required">
+                                                    Liquidated Damages  is required
+                                                </label>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Payment Mechanism : </td>
+                                        <td>
+                                            <input type="text" formControlName="ppaPaymentmechanism" />
+                                            <span style="color: red;" *ngIf="ppaPaymentmechanism.invalid && (ppaPaymentmechanism.dirty || submitted)">
+                                                <label *ngIf="ppaPaymentmechanism.errors.required">
+                                                    Payment Mechanism is required
+                                                </label>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Others : </td>
+                                        <td>
+                                            <input type="text" formControlName="ppaOthers" />
+                                            <span style="color: red;" *ngIf="ppaOthers.invalid && (ppaOthers.dirty || submitted)">
+                                                <label *ngIf="ppaOthers.errors.required">
+                                                    Required
+                                                </label>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <br />
+                    <br />
+                    <table width="100%" border="0" style="text-align:center">
+                        <tr>
+                            <td><b><u>Group Profile :</u></b></td>
+                        </tr>
+                    </table>
+                    <br />
+                    <br />
+                    <table width="100%" border="1">
+                        <tr>
+                            <td width="30%">Experience in Relevant Sector</td>
+                            <td>
+                                <input type="text" formControlName="experienceinRelSec" />
+                                <span style="color: red;" *ngIf="experienceinRelSec.invalid && (experienceinRelSec.dirty || submitted)">
+                                    <label *ngIf="experienceinRelSec.errors.required">
+                                        Experience is required
+                                    </label>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Financial Strength</td>
+                            <td>
+                                <input type="text" formControlName="financialStrenth" />
+                                <span style="color: red;" *ngIf="financialStrenth.invalid && (financialStrenth.dirty || submitted)">
+                                    <label *ngIf="financialStrenth.errors.required">
+                                        Financial Strength is required
+                                    </label>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Credit Rating</td>
+                            <td>{{project?.projectCreditRating}}</td>
+                        </tr>
+                        <tr>
+                            <td>Indicative Equity Arrangement</td>
+                            <td>
+                                <input type="text" formControlName="indicativeEquityArrangement" />
+                                <span style="color: red;" *ngIf="indicativeEquityArrangement.invalid && (indicativeEquityArrangement.dirty || submitted)">
+                                    <label *ngIf="indicativeEquityArrangement.errors.required">
+                                        Indicative Equity Arrangement is required
+                                    </label>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>previous Relation with Lender (if any)</td>
+                            <td>
+                                <input type="text" formControlName="prevRelationwithLender" />
+                                <span style="color: red;" *ngIf="prevRelationwithLender.invalid && (prevRelationwithLender.dirty || submitted)">
+                                    <label *ngIf="prevRelationwithLender.errors.required">
+                                        Previous Relation with Lender is required
+                                    </label>
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                    <br />
+                    <br />
+                    <table width="100%" border="0" style="text-align:center">
+                        <tr>
+                            <td><b><u>Promoter's Expectation:</u></b></td>
+                        </tr>
+                    </table>
+                    <br />
+                    <br />
+                    <table width="100%" border="1">
+                        <tr>
+                            <td width="30%">Tenure</td>
+                            <td>
+                                <input type="text" formControlName="tenure" />
+                                <span style="color: red;" *ngIf="tenure.invalid && (tenure.dirty || submitted)">
+                                    <label *ngIf="tenure.errors.required">
+                                        Tenure is required
+                                    </label>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Rate of Interest</td>
+                            <td>
+                                <input type="text" formControlName="roi" />
+                                <span style="color: red;" *ngIf="roi.invalid && (roi.dirty || submitted)">
+                                    <label *ngIf="roi.errors.required">
+                                        Rate of Intrest is required
+                                    </label>
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Specific Terms & Conditions</td>
+                            <td>
+                                <textarea formControlName="termsAndConditions"></textarea>
+                                <span style="color: red;" *ngIf="termsAndConditions.invalid && (termsAndConditions.dirty || submitted)">
+                                    <label *ngIf="termsAndConditions.errors.required">
+                                        T&C is required
+                                    </label>
+                                </span>
+
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <br />
+                    <br />
+                    <table width="100%" border="0" style="text-align:center">
+                        <tr>
+                            <td><b><u>Policy Compliance with institutions:</u></b></td>
+                        </tr>
+                    </table>
+                    <br />
+                    <br />
+                    <table width="100%" border="1">
+                        <tr>
+                            <td width="30%">Power Finance with Corporation</td>
+                            <td>
+                                <input type="text" formControlName="powerFinCorp" />
+                                <span style="color: red;" *ngIf="powerFinCorp.invalid && (powerFinCorp.dirty || submitted)">
+                                    <label *ngIf="powerFinCorp.errors.required">
+                                        Power Finance is required
+                                    </label>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Rural Electrification Corporation</td>
+                            <td>
+                                <input type="text" formControlName="ruralElectrificationCorp" />
+                                <span style="color: red;" *ngIf="ruralElectrificationCorp.invalid && (ruralElectrificationCorp.dirty || submitted)">
+                                    <label *ngIf="ruralElectrificationCorp.errors.required">
+                                        Rural Electrification Corp. is required
+                                    </label>
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Others</td>
+                            <td>
+                                <input type="text" formControlName="policyCompOthers" />
+                                <span style="color: red;" *ngIf="policyCompOthers.invalid && (policyCompOthers.dirty || submitted)">
+                                    <label *ngIf="policyCompOthers.errors.required">
+                                        Required
+                                    </label>
+                                </span>
+                            </td>
+                        </tr>
+
+                    </table>
+                    <br />
+                    <br />
+                    <table width="100%" border="0" style="text-align:center">
+                        <tr>
+                            <td><b><u>Strategy to be Adopted:</u></b></td>
+                        </tr>
+                    </table>
+                    <br />
+                    <br />
+                    <table width="100%" border="1">
+                        <tr>
+                            <!--<td width="30%">Add Details:</td>-->
+                            <td>
+                                <textarea formControlName="strategyAdopted"></textarea>
+                                <span style="color: red;" *ngIf="strategyAdopted.invalid && (strategyAdopted.dirty || submitted)">
+                                    <label *ngIf="strategyAdopted.errors.required">
+                                        Strategy  is required
+                                    </label>
+                                </span>
+                            </td>
+                        </tr>
+
+
+                    </table>
+                </div>
+
+                <div style="text-align:center;margin-top:20px;">
+                    <input type="submit"
+                           class="btn btn-primary"
+                           value="Save" />&nbsp;<input type="button" class="btn btn-warning" value="Cancel" (click)="cancel()" />
+                </div>
+
+                <div class="divTableRow">
+                    <div class="divTableCell">      </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+                <div class="divTableRow">
+                    <div class="divTableCell">    </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

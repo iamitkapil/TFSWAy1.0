@@ -1,0 +1,168 @@
+﻿<div style="width:100%;margin-top:5px;"> <b>Group Name :</b>{{groupName}} &nbsp; &nbsp;  <i class="glyphicon glyphicon-arrow-right"></i> &nbsp; <b>Company Name :</b>{{companyName}} &nbsp; &nbsp;  <i class="glyphicon glyphicon-arrow-right"></i>  &nbsp; <b>Project Name :</b>{{projectName}} &nbsp; &nbsp;   </div>
+<div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableHead"><b>Queries & issues List</b></div>
+            <div class="divTableHead"></div>
+        </div>
+
+        <div class="divTableBody">
+            <div style="margin:20px;">
+
+                <button class="btn btn-success btn-circle pull-right" (click)="add()" title="Add Queries & issues">
+                    <i class="glyphicon glyphicon-plus"></i>
+                </button>
+                <div *ngIf="queries.length > 0">
+                    <button class="btn btn-success btn-circle pull-right" (click)="ExportToExcel()" title="Export to Excel">
+                        <i class="glyphicon glyphicon-export"></i>
+                    </button>
+                    <button class="btn btn-success btn-circle pull-right" (click)="ExportToMSWord()" title="Export to MSWord">
+                        <i class="glyphicon glyphicon-text-background"></i>
+                    </button>
+                    <button [disabled]="IsSelected" class="btn btn-success btn-circle pull-right" (click)="SendMail()" title="Send Mail">
+                        <i class="glyphicon glyphicon-envelope"></i>
+                    </button>
+                </div>
+                <ng-progress></ng-progress>
+                <div class="alert-danger">{{errorMessage}}</div>
+
+                <div class="input-group" *ngIf="queries.length > 0">
+                    <input type="text" class="form-control" name="search" [(ngModel)]="search"
+                           aria-describedby="basic-addon1">
+                    <span class="input-group-addon" id="basic-addon1">Search</span>
+
+                </div>
+
+                <div id="exportgrid">
+                    <table class="table table-bordered">
+                        <thead class="thead-inverse">
+                            <tr *ngIf="queries.length >0">
+                                <th>
+                                    Sr. No.
+                                    <span></span>
+                                </th>
+
+                                <th (click)="setOrder('QueryText')">
+                                    Query
+                                    <span class="glyphicon sort-icon" *ngIf="order =='QueryText'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+
+                                <!--<th (click)="setOrder('AssignTo')">
+                                    Assigned To
+                                    <span class="glyphicon sort-icon" *ngIf="order =='AssignTo'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>-->
+
+                                <!--<th (click)="setOrder('Replytext')">
+                                    Reply
+                                    <span class="glyphicon sort-icon" *ngIf="order =='Replytext'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>-->
+
+                                <th (click)="setOrder('querytype')">
+                                    QueryType
+                                    <span class="glyphicon sort-icon" *ngIf="order =='querytype'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+
+                                <th (click)="setOrder('severity')">
+                                    Query Stage
+                                    <span class="glyphicon sort-icon" *ngIf="order =='severity'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+
+                           
+
+                                <th (click)="setOrder('Status')">
+                                    Status
+                                    <span class="glyphicon sort-icon" *ngIf="order =='Status'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+                                <th (click)="setOrder('Documnets')">
+                                    Reference Documnets
+                                    <span class="glyphicon sort-icon" *ngIf="order =='Documnets'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+                                <th>
+                                    Generate Report
+                                    <span></span>
+                                </th>
+                                <!--<th>
+                                    Send Mail
+                                </th>-->
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr *ngFor="let query of queries| filter: search | orderBy: order:reverse:'case-insensitive'| pageditems: pager;let i=index">
+                                <td>{{i+1}} </td>
+                                <td title={{query.subject}}><a [routerLink]="['replylist',query.queryId]">{{ (query.subject.length> 40)? (query.subject | slice:0:40)+'..':(query.subject) }}</a></td>
+                                <!--<td>{{query.assignTo}}</td>-->
+                                <!--<td title={{query.replytext}}><a [routerLink]="['replylist',query.queryId]">{{ (query.replytext.length> 40)? (query.replytext | slice:0:40)+'..':(query.replytext) }}</a></td>-->
+                                <td (load)="test()">{{query.querytype}}</td>
+                                <td>{{query.severity}}</td>
+                                
+                                <td>{{query.status}}</td>
+                                <td>
+                                    <table>
+                                        <tr *ngFor="let doc of query.documnetRefList;let j=index">
+                                            <td>{{j+1}})&nbsp; </td>
+                                            <td><a href="{{doc.documnetPath}}" target="_blank">{{doc.documnetName}}</a> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <!--<td>
+                                    <button class="btn-xs btn-success" (click)="SendMail(query.assignToMailID,query.subject,query.refDocument)" title="Send Mail">
+                                        <i class="glyphicon glyphicon-envelope"></i>
+                                    </button>
+                                </td>-->
+                                <td><input type="checkbox" (change)="onChange($event,query.queryId,query.refDocument)" /></td>
+                                <td style="width: 70px;">
+                                    <!--<i class="glyphicon glyphicon-trash pointer fa-lg"
+                                    (click)="delete(query.queryId)" title="Delete"></i>-->
+                                    <i class="glyphicon glyphicon-stats"
+                                       (click)="ChangeStatus(query.queryId)" title="Change Status"></i>
+                                </td>
+                            </tr>
+                            <tr *ngIf="!queries || queries.length==0">
+                                <td colspan="7">No Query is available</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <table cellspacing="7">
+                    <tr>
+                        <td>
+                            <div>
+                                <ul *ngIf="pager.pages && pager.pages.length" class="pagination pagination-sm">
+                                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                        <a (click)="setPage(1)"> First </a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                        <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                                    </li>
+                                    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                                        <a (click)="setPage(page)">{{page}}</a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                        <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                        <a (click)="setPage(pager.totalPages)">Last</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+
+                    </tr>
+
+                </table>  
+                <div class="divTableRow">
+                    <div class="divTableCell">      </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+                <div class="divTableRow">
+                    <div class="divTableCell">    </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

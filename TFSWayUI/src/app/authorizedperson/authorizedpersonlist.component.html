@@ -1,0 +1,141 @@
+﻿<div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableHead"><b>Authorized Person List</b></div>
+            <div class="divTableHead"></div>
+        </div>
+
+        <div class="divTableBody">
+            <div style="margin:20px;">
+                <button class="btn btn-success btn-circle pull-right" (click)="add()" title="Add Agency">
+                    <i class="glyphicon glyphicon-plus"></i>
+                </button>
+
+                <ng-progress></ng-progress>
+                <div class="alert-danger">{{errorMessage}}</div>
+
+                <div class="input-group">
+                    <input type="text" class="form-control" name="search" [(ngModel)]="search"
+                           aria-describedby="basic-addon1">
+                    <span class="input-group-addon" id="basic-addon1">Search</span>
+                </div>
+
+                <table class="table table-bordered">
+                    <thead class="thead-inverse">
+                        <tr *ngIf="authorisedpersons.length >0">
+                            
+                            <th (click)="setOrder('name')">
+                                Authorised Person Name
+                                <span class="glyphicon sort-icon" *ngIf="order =='name'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+
+                            <th (click)="setOrder('role')">
+                                Role
+                                <span class="glyphicon sort-icon" *ngIf="order =='role'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+
+                            <th (click)="setOrder('contactNumber')">
+                                Contact
+                                <span class="glyphicon sort-icon" *ngIf="order =='contactNumber'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+
+                            <th (click)="setOrder('email')">
+                                Email
+                                <span class="glyphicon sort-icon" *ngIf="order =='email'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+
+                            <th (click)="setOrder('agencyType')">
+                                Agency Type 
+                                <span class="glyphicon sort-icon" *ngIf="order =='agencyType'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+
+                            <th (click)="setOrder('agencyName')">
+                                Agency Name
+                                <span class="glyphicon sort-icon" *ngIf="order =='agencyName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+
+                            <th (click)="setOrder('agencyAddress')">
+                                Agency Address
+                                <span class="glyphicon sort-icon" *ngIf="order =='agencyAddress'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+                           
+                            <th (click)="setOrder('isCoordinator')">
+                                IsCoordinator?
+                                <span class="glyphicon sort-icon" *ngIf="order =='isCoordinator'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+
+                            
+                            
+                            <th *ngIf="activeuserdesignation!='Supervisor'">Action</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let authorisedperson of authorisedpersons | filter: search | orderBy: order:reverse:'case-insensitive'| pageditems: pager ;">
+                            <td>{{authorisedperson.name }}</td>
+                            <td>{{authorisedperson.role }}</td>
+                            <td>{{authorisedperson.contactNumber }}</td>
+                            <td>{{authorisedperson.email }}</td>
+                            <td>{{authorisedperson.agencyType }}</td>
+                            <td>{{authorisedperson.agencyName }}</td>
+                            <td>{{authorisedperson.agencyAddress}}</td>
+                            <td>{{authorisedperson.isCoordinator }}</td>
+
+
+                            <td style="width: 70px;">
+                                <i class="glyphicon glyphicon-edit pointer fa-lg"
+                                   (click)="edit(authorisedperson.authorisedPersonId)" title="Edit"></i>
+                                <i class="glyphicon glyphicon-trash pointer fa-lg"
+                                   (click)="delete(authorisedperson)" title="Delete"></i>
+                            </td>
+                        </tr>
+                        <tr *ngIf="!authorisedpersons || authorisedpersons.length==0">
+                            <td colspan="7">No Authorised Persons Available..............</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table cellspacing="10">
+                    <tr>
+
+
+                        <td>
+                            <div>
+                                <ul *ngIf="pager.pages && pager.pages.length" class="pagination pagination-sm">
+                                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                        <a (click)="setPage(1)"> First </a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                        <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                                    </li>
+                                    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                                        <a (click)="setPage(page)">{{page}}</a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                        <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                        <a (click)="setPage(pager.totalPages)">Last</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+
+                    </tr>
+
+                </table>
+
+                <div class="divTableRow">
+                    <div class="divTableCell">      </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+                <div class="divTableRow">
+                    <div class="divTableCell">    </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

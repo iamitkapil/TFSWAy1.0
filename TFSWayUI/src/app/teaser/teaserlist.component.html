@@ -1,0 +1,127 @@
+﻿<div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableHead"><b>Teaser List</b></div>
+            <div class="divTableHead"></div>
+        </div>
+
+        <div class="divTableBody">
+            <div style="margin:20px;">
+                <button *ngIf="isPromoter" class="btn btn-success btn-circle pull-right" (click)="add()" title="Add Teaser">
+                    <i  class="glyphicon glyphicon-plus"></i>
+                </button>
+                <div *ngIf="teasers.length > 0">
+                    <button class="btn btn-success btn-circle pull-right" (click)="ExportToExcel()" title="Export to Excel">
+                        <i class="glyphicon glyphicon-export"></i>
+                    </button>
+                    <button class="btn btn-success btn-circle pull-right" (click)="ExportToMSWord()" title="Export to MSWord">
+                        <i class="glyphicon glyphicon-text-background"></i>
+                    </button>
+                </div>
+                <ng-progress></ng-progress>
+                <div class="alert-danger">{{errorMessage}}</div>
+
+                <div class="input-group" *ngIf="teasers.length >0">
+                    <input type="text" class="form-control" name="search" [(ngModel)]="search"
+                           aria-describedby="basic-addon1">
+                    <span class="input-group-addon" id="basic-addon1">Search</span>
+                </div>
+                <div id="exportgrid">
+                    <table class="table table-bordered">
+                        <thead class="thead-inverse">
+                            <tr *ngIf="teasers.length >0">
+                                <th (click)="setOrder('group')">
+                                    Group
+                                    <span class="glyphicon sort-icon" *ngIf="order =='group'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+
+                                <th (click)="setOrder('expectedROI')">
+                                    Expected ROI
+                                    <span class="glyphicon sort-icon" *ngIf="order =='expectedROI'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+
+                                <th (click)="setOrder('sellingArrangement')">
+                                    Selling Arrangement
+                                    <span class="glyphicon sort-icon" *ngIf="order =='sellingArrangement'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+
+                                <th (click)="setOrder('powerEvacuation')">
+                                    Power Evacuation
+                                    <span class="glyphicon sort-icon" *ngIf="order =='powerEvacuation'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+
+                                <th (click)="setOrder('proposedSecurity')">
+                                    Proposed Security
+                                    <span class="glyphicon sort-icon" *ngIf="order =='proposedSecurity'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+                                <th (click)="setOrder('status')">
+                                    Status
+                                    <span class="glyphicon sort-icon" *ngIf="order =='status'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+
+                                <th *ngIf="activeuserdesignation!='Supervisor'">Action</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <tr (click)="view(teaser.teaserId)" *ngFor="let teaser of teasers| filter: search | orderBy: order:reverse:'case-insensitive'| pageditems: pager ;" >
+                                <td>{{teaser.group}}</td>
+                                <td>{{teaser.expectedROI}}</td>
+                                <td>{{teaser.sellingArrangement}}</td>
+                                <td>{{teaser.powerEvacuation}}</td>
+                                <td>{{teaser.proposedSecurity}}</td>
+                                <td>{{teaser.status}}</td>
+
+                                <td style="width: 70px;" *ngIf="activeuserdesignation!='Supervisor' && teaser.status == 'Created'">
+                                    <i class="glyphicon glyphicon-edit pointer fa-lg"
+                                       (click)="edit(teaser.teaserId)" title="Edit"></i>
+                                </td>
+                            </tr>
+                            <tr *ngIf="!teasers || teasers.length==0">
+                                <td colspan="7">No teasers Available..............</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <table cellspacing="7">
+                    <tr>
+                        <td>
+                            <div>
+                                <ul *ngIf="pager.pages && pager.pages.length" class="pagination pagination-sm">
+                                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                        <a (click)="setPage(1)"> First </a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                        <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                                    </li>
+                                    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                                        <a (click)="setPage(page)">{{page}}</a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                        <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                        <a (click)="setPage(pager.totalPages)">Last</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+
+                    </tr>
+
+                </table>  
+                    <div class="divTableRow">
+                        <div class="divTableCell">      </div>
+                        <div class="divTableCell_2"></div>
+                    </div>
+                    <div class="divTableRow">
+                        <div class="divTableCell">    </div>
+                        <div class="divTableCell_2"></div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+    
+
+

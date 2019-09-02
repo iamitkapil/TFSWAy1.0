@@ -1,0 +1,202 @@
+﻿<form [formGroup]="clientForm" (ngSubmit)="save()" novalidate>
+    <div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableHead"><b>Client Detail</b></div>
+                <div class="divTableHead"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Authorized Person Name</div>
+                <div class="divTableCell_2"><input type="text" formControlName="name" disabled /></div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Designation</div>
+                <div class="divTableCell_2"><input type="text" formControlName="designation" disabled /></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Contact Number</div>
+                <div class="divTableCell_2"><input type="text" formControlName="contactNumber" disabled /></div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">Email Address</div>
+                <div class="divTableCell_2"><input type="text" formControlName="email" disabled /></div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">Lender</div>
+                <div class="divTableCell_2">
+                    <label for="Lenders">Click here to Add</label>
+                    <button title="Add Lender" class=" btn-xs btn-success" name="Add Lender" (click)="addLender(clientId)">
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </button>
+                    <table>
+                        <tr *ngFor="let lender of lenders;let i=index">
+                            <td>
+                                <div class="divTableCell_2">
+                                    <input type="text" readonly value="{{lender.lenderName}} {{lender.lenderAddress }}" style="margin-left:-10px" />
+                                </div>
+                            </td>
+                            <td style="width: 70px;">
+                                <i class="glyphicon glyphicon-remove"
+                                   (click)="delete(query.queryId)" title="Delete"></i>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">General Manager Assigned</div>
+                <div class="divTableCell_2"><input type="text" formControlName="assignedGM" /></div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">General Manager Region</div>
+                <div class="divTableCell_2"><input type="text" formControlName="gmRegion" /></div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Email Address</div>
+                <div class="divTableCell_2"><input type="text" formControlName="assignedGMEmail" /></div>
+            </div>
+
+
+            <div class="divTableRow">
+                <div class="divTableCell">Project Officer Assigned</div>
+                <div class="divTableCell_2"><input type="text" formControlName="assignedPO" /></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Designation</div>
+                <div class="divTableCell_2"><input type="text" formControlName="assignedPODesignation" /></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Contact Number</div>
+                <div class="divTableCell_2"><input type="text" formControlName="assignedPOContactNo" /></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Email Address</div>
+                <div class="divTableCell_2"><input type="text" formControlName="assignedPOEmail" /></div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">Entity Officer Assigned</div>
+                <div class="divTableCell_2"><input type="text" formControlName="assignedEO" /></div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Designation</div>
+                <div class="divTableCell_2"><input type="text" formControlName="assignedEODesignation" /></div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Contact Number</div>
+                <div class="divTableCell_2"><input type="text" formControlName="assignedEOContactNo" /></div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Email Address</div>
+                <div class="divTableCell_2"><input type="text" formControlName="assignedEOEmail" /></div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">Legal Officer Assigned</div>
+                <div class="divTableCell_2"><input type="text" formControlName="assignedLO" /></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Designation</div>
+                <div class="divTableCell_2"><input type="text" formControlName="assignedLODesignation" /></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Contact Number</div>
+                <div class="divTableCell_2"><input type="text" formControlName="assignedLOContactNo" /></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Email Address</div>
+                <div class="divTableCell_2"><input type="text" formControlName="assignedLOEmail" /></div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">LE Appointed</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="leName" />
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Designation</div>
+                <div class="divTableCell_2"><input type="text" formControlName="leDesignation" /></div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Contact Number</div>
+                <div class="divTableCell_2"><input type="text" formControlName="leContactNo" /></div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Email Address</div>
+                <div class="divTableCell_2"><input type="text" formControlName="leEmail" /></div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">LFA Appointed</div>
+                <div class="divTableCell_2"><input type="text" formControlName="lfaName" /></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Designation</div>
+                <div class="divTableCell_2"><input type="text" formControlName="lfaDesignation" /></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Contact Number</div>
+                <div class="divTableCell_2"><input type="text" formControlName="lfaContactNo" /></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Email Address</div>
+                <div class="divTableCell_2"><input type="text" formControlName="lfaEmail" /></div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">LIA Appointed</div>
+                <div class="divTableCell_2"><input type="text" formControlName="liaName" /></div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Designation</div>
+                <div class="divTableCell"><input type="text" formControlName="liaDesignation" /></div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Contact Number</div>
+                <div class="divTableCell_2"><input type="text" formControlName="liaContactNo" /></div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Email Address</div>
+                <div class="divTableCell_2"><input type="text" formControlName="liaEmail" /></div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">LLC Appointed</div>
+                <div class="divTableCell_2"><input type="text" formControlName="llcName" /></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Designation</div>
+                <div class="divTableCell_2"><input type="text" formControlName="llcDesignation" /></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Contact Number</div>
+                <div class="divTableCell_2"><input type="text" formControlName="llcContactNo" /></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Email Address</div>
+                <div class="divTableCell_2"><input type="text" formControlName="llcEmail" /></div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell"></div>
+                <div class="divTableCell_2">
+                    <input type="submit"
+                           class="btn btn-primary"
+                           value="Save" />&nbsp;<input type="button" class="btn btn-warning" value="Cancel" (click)="cancel()" />
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">      </div>
+                <div class="divTableCell_2"></div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">    </div>
+                <div class="divTableCell_2"></div>
+            </div>
+
+        </div>
+    </div>
+</form>

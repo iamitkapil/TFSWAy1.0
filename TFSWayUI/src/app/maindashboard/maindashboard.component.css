@@ -1,0 +1,87 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 50%;
+    padding: 3px;
+    height: 350px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+.divTable {
+    font-size: 77%;
+    font-family: "Myriad Web",Verdana,Helvetica,Arial,sans-serif;
+}
+
+.divTable {
+    display: table;
+    width: 100%;
+}
+
+.divTableRow {
+    display: table-row;
+}
+
+.divTableRow_2 {
+    display: table-row;
+    background-color: #eeeeee;
+}
+
+.divTableHeading {
+    background-color: #EEE;
+    display: table-header-group;
+}
+
+.divTableCell {
+    border: 0px solid #eeeeee;
+    display: table-cell;
+    padding: 8px 10px;
+    width: 27%;
+}
+
+.divTableCell_2 {
+    border: 0px solid #eeeeee;
+    display: table-cell;
+    padding: 8px 10px;
+    width: 63%;
+}
+
+.divTableHead {
+    border: 0px;
+    background-color: #a31d21;
+    display: table-cell;
+    padding: 3px 10px;
+    color: white;
+    font-size: 15px;
+}
+
+.divTableHeading {
+    background-color: #EEE;
+    display: table-header-group;
+    font-weight: bold;
+}
+
+.divTableFoot {
+    background-color: #EEE;
+    display: table-footer-group;
+    font-weight: bold;
+}
+
+.divTableBody {
+    display: table-row-group;
+}
+
+thead th {
+    background-color: #FEE4D7;
+    color: black;
+}

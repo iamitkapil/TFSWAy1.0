@@ -1,0 +1,131 @@
+﻿<div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableHead"><b>{{companyName}} Shareholder List</b></div>
+            <div class="divTableHead"></div>
+        </div>
+
+        <div class="divTableBody">
+            <div style="margin:20px;">
+                <button class="btn btn-success btn-circle pull-right" (click)="add()" title="Add Shareholder">
+                    <i class="glyphicon glyphicon-plus"></i>
+                </button>
+
+                <ng-progress></ng-progress>
+                <div class="alert-danger">{{errorMessage}}</div>
+
+                <div class="input-group">
+                    <input type="text" class="form-control" name="search" [(ngModel)]="search"
+                           aria-describedby="basic-addon1">
+                    <span class="input-group-addon" id="basic-addon1">Search</span>
+                </div>
+
+                <table class="table table-bordered">
+                    <thead class="thead-inverse">
+                        <tr *ngIf="shareholders.length >0">
+                            <th (click)="setOrder('name')">
+                                Shareholder Name
+                                <span class="glyphicon sort-icon" *ngIf="order =='name'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+
+                            <th (click)="setOrder('share')">
+                                Share
+                                <span class="glyphicon sort-icon" *ngIf="order =='share'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+
+                            <th (click)="setOrder('faceValue')">
+                                Face Value
+                                <span class="glyphicon sort-icon" *ngIf="order =='faceValue'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+
+                            <th (click)="setOrder('percentage')">
+                                Percentage
+                                <span class="glyphicon sort-icon" *ngIf="order =='percentage'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+
+                           
+                            <th (click)="setOrder('shareholderType')">
+                                Shareholder Type
+                                <span class="glyphicon sort-icon" *ngIf="order =='shareholderType'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+
+                            <th (click)="setOrder('promotername')">
+                                Promoter Name
+                                <span class="glyphicon sort-icon" *ngIf="order =='promotername'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+
+                            <!--<th (click)="setOrder('isMainShareholder')">
+                                Main Shareholder?
+                                <span class="glyphicon sort-icon" *ngIf="order =='isMainShareholder'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>-->
+                            <th *ngIf="activeuserdesignation!='Supervisor'">Action</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let shareholder of shareholders | filter: search | orderBy: order:reverse:'case-insensitive'| pageditems: pager ;">
+                            <td>{{shareholder.name }}</td>
+                            <td>{{shareholder.share }}</td>
+                            <td>{{shareholder.faceValue}}</td>
+                            <td>{{shareholder.percentage}}</td>
+                            <td>{{shareholder.shareholderType }}</td>
+                            <td>{{shareholder.promoterName }}</td>
+                            <!--<td>{{shareholder.isMainShareholder}}</td>-->
+
+                            <td style="width: 70px;" *ngIf="activeuserdesignation!='Supervisor'">
+                                <i class="glyphicon glyphicon-edit pointer fa-lg"
+                                   (click)="edit(shareholder.shareholderId)" title="Edit"></i>
+                                <i class="glyphicon glyphicon-trash pointer fa-lg"
+                                   (click)="delete(shareholder)" title="Delete"></i>
+                            </td>
+                        </tr>
+                        <tr *ngIf="!shareholders || shareholders.length==0">
+                            <td colspan="7">No Shareholders Available..............</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table cellspacing="10">
+                    <tr>
+
+
+                        <td>
+                            <div>
+                                <ul *ngIf="pager.pages && pager.pages.length" class="pagination pagination-sm">
+                                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                        <a (click)="setPage(1)"> First </a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                        <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                                    </li>
+                                    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                                        <a (click)="setPage(page)">{{page}}</a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                        <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                        <a (click)="setPage(pager.totalPages)">Last</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+
+                    </tr>
+
+                </table>
+
+                <div class="divTableRow">
+                    <div class="divTableCell">      </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+                <div class="divTableRow">
+                    <div class="divTableCell">    </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,66 @@
+﻿<div style="width:100%;margin-top:5px;"> <b>Group Name :</b>{{groupName}} &nbsp; &nbsp;  <i class="glyphicon glyphicon-arrow-right"></i> &nbsp; <b>Company Name :</b>{{companyName}} &nbsp; &nbsp;  <i class="glyphicon glyphicon-arrow-right"></i>  &nbsp; <b>Project Name :</b>{{projectName}} &nbsp; &nbsp;   </div>
+<div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableHead"><b>Master Document List</b></div>
+            <div class="divTableHead"></div>
+        </div>
+
+        <div class="divTableBody">
+            <div style="margin:20px;">
+                <button class="btn btn-primary pull-left" (click)="gotoprojectDocument()" title="Go To Project Document">
+                    Go To Project Document
+                </button>
+
+                <div class="input-group" *ngIf="masterdocs.length > 0">
+                    <input type="text" class="form-control" name="search" [(ngModel)]="search"
+                           aria-describedby="basic-addon1">
+                    <span class="input-group-addon" id="basic-addon1">Search</span>
+                </div>
+                <div id="exportgrid">
+                    <table class="table table-bordered">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>
+                                    Sr. No.
+                                </th>
+                                <th>
+                                    Document Name
+                                </th>
+                                <th>
+                                    Stage
+                                </th>
+                                <th>
+                                    Required
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let doc of masterdocs| filter: search ;let i=index">
+                                <td>{{i+1}} </td>
+                                <td>{{doc.document}}</td>
+                                <td>{{doc.stage}}</td>
+                                <td><input type="checkbox" [checked]="checkchecked(doc.document)" (change)="onChange($event,doc.document,doc.stage)" /></td>
+                            </tr>
+                            <tr *ngIf="!masterdocs || masterdocs.length==0">
+                                <td colspan="4">No master Document available</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="divTableRow">
+                    <div class="divTableCell">      </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+                <div class="divTableRow">
+                    <div class="divTableCell">    </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

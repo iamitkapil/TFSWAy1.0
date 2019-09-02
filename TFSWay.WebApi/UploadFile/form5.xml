@@ -1,0 +1,363 @@
+<review-case createdate="05/Feb/2018 10:13:32" system="" batchid="0" transactionno="1" batchname="" version="6.0">
+  <transaction>
+    <objects>
+      <object class="Th_673016833_2_PNORequest" name="PNORequest">
+        <property name="clientTransactionId" value="24848" />
+        <property name="archiveMode" value="true" />
+        <property name="deliveryMode" value="Mail" />
+        <property name="letterType" value="ANCILLARY_OMNIA_TIER1" />
+        <property name="printShareFolderPath" value="/mnt/autofs/output/PNOPrintShare/" />
+        <property name="letterSequenceNo" value="2" />
+        <property name="groupName" value="RAJENDRASIXUAT" />
+        <property name="networkName" value="" />
+        <property name="contactName" value="" />
+        <property name="providerName" value="RAJENDRASIXUAT" />
+        <property name="provId" value="1346483" />
+        <property name="npiType2" value="1050334832" />
+        <property name="ETLBatchId" value="25030" />
+        <property name="practitionerInfo">
+          <object class="Th_673016833_2_practitionerInfo" name="practitionerInfo">
+            <property name="practitionerName">
+              <object class="Th_673016833_2_practitionerName" name="practitionerName">
+                <property name="firstName" value="" />
+                <property name="middleName" value="" />
+                <property name="lastName" value="" />
+              </object>
+            </property>
+            <property name="degree" value="" />
+            <property name="practitionerAddress">
+              <object class="Th_673016833_2_practitionerAddress" name="practitionerAddress">
+                <property name="addressLine1" value="34 PINE HILL RD" />
+                <property name="addressLine2" value="" />
+                <property name="addressLine3" value="" />
+                <property name="city" value="Annandale" />
+                <property name="stateCd" value="NJ" />
+                <property name="zipCode" value="08801" />
+                <property name="phoneNumber" value="" />
+                <property name="faxNumber" value="" />
+              </object>
+            </property>
+          </object>
+        </property>
+        <property name="creditCoordInfo">
+          <object class="Th_673016833_2_creditCoordInfo" name="creditCoordInfo">
+            <property name="creditCoordName" value="" />
+            <property name="creditCoordPhone" value="" />
+            <property name="creditCoordEmail" value="" />
+            <property name="creditCoordFax" value="" />
+          </object>
+        </property>
+        <property name="specialty" value="" />
+        <property name="suffix" value="" />
+        <property name="TIN" value="100-02-9017" />
+        <property name="fieldRep" value="" />
+        <property name="reasonsInfo">
+          <object class="Th_673016833_2_reasonsInfo" name="reasonsInfo">
+            <property name="tabledReason" value="" />
+            <property name="withdrawalReason" value="" />
+            <property name="terminationReason" value="" />
+            <property name="denialReason" value="" />
+            <property name="reinstatementReason" value="" />
+            <property name="termReason" value="" />
+            <property name="missingReasons">
+              <object class="Th_673016833_2_missingReasons" name="missingReasons">
+                <property name="missingReason" value="" index="0" />
+              </object>
+            </property>
+          </object>
+        </property>
+        <property name="returnAddress">
+          <object class="Th_673016833_2_returnAddress" name="returnAddress">
+            <property name="addessLine1" value="" />
+          </object>
+        </property>
+        <property name="networkNameArray" value="" index="0" />
+      </object>
+    </objects>
+  </transaction>
+  <review-document docdef-resid="167602310" docdef-resverid="157781315" bo-class="" bo-name="" styleset-resid="167601675" styleset-resverid="673017136" language="-1" jurisdiction="-1" idiom="-1" device="" brand="-1" effective-date="05/Feb/2018 10:13:32">
+    <userkeys>
+      <userkey index="0" value="24848" />
+      <userkey index="1" value="24848" />
+    </userkeys>
+    <review-channel channel="167600002" destination="-5" layout-resid="167601673" layout-resverid="167613157">
+      <properties>
+        <property name="print.config.resid" value="167602311" />
+        <property name="print.jobsetup" value="PRINT" />
+        <property name="bin.outputpath" value="/mnt/autofs/output/PNOPrintShare/Print/PNO_18036_0" />
+        <property name="disk.outputpath" value="/mnt/autofs/output/PNOPrintShare/Archive/PNO_24848_18036_0.pdf" />
+        <property name="passed_Copy_Show" value="deliverByMail or FaxFailure" />
+        <property name="preview.exclude" value="true" />
+      </properties>
+      <content>
+        <region name="Body">
+          <section id="378547790" name="Body" fragresid="167602310" fragresverid="157781315">
+            <section id="1184918400" name="Letter Enclosure" fragresid="167602310" fragresverid="157781315">
+              <enclosure enclosureid="1" channelid="167600002" resid="673000929" resverid="673008371" />
+            </section>
+            <section id="1059171195" name="Forms" fragresid="167602310" fragresverid="157781315" />
+          </section>
+        </region>
+      </content>
+      <enclosures>
+        <review-document docdef-resid="673000929" docdef-resverid="673008371" bo-class="" bo-name="" styleset-resid="167601675" styleset-resverid="673017136" language="-1" jurisdiction="-1" idiom="-1" device="" brand="-1" effective-date="05/Feb/2018 10:13:32" enclosureid="1">
+          <userkeys>
+            <userkey index="0" value="24848" />
+            <userkey index="1" value="24848" />
+          </userkeys>
+          <review-channel channel="167600002" destination="3" layout-resid="167601673" layout-resverid="167613157">
+            <properties />
+            <content>
+              <region name="PrinterTag">
+                <section id="942821887" name="Printer Tag" fragresid="673000929" fragresverid="673008371">
+                  <frag id="135396085" name="NON-PROD METADATA" no-match="error" type="text" fragresid="673000375" fragresverid="673018209">
+                    <lcij id="751030654" name="Fragment">
+                      <p style="MetadataNormalText" xml:space="preserve">$$METADATA$$|<var name="PNORequest.clientTransactionId" type="int" format="###0" locale="en_US">24848</var>|1|||||||0||HORPNJPM|</p>
+                      <p style="MetadataNormalText" xml:space="preserve">
+                        <var name="PNORequest.providerName" type="string">RAJENDRASIXUAT</var>
+                        <br />
+                        <var name="PNORequest.practitionerInfo.practitionerAddress.addressLine1" type="string">34 PINE HILL RD</var>
+                        <br />
+                        <var name="PNORequest.practitionerInfo.practitionerAddress.addressLine2" type="string" />
+                        <br />
+                        <var name="PNORequest.practitionerInfo.practitionerAddress.addressLine3" type="string" />
+                        <br />
+                        <var name="PNORequest.practitionerInfo.practitionerAddress.city" type="string">Annandale</var>, <var name="PNORequest.practitionerInfo.practitionerAddress.stateCd" type="string">NJ</var> <var name="PNORequest.practitionerInfo.practitionerAddress.zipCode" type="string">08801</var></p>
+                    </lcij>
+                  </frag>
+                </section>
+              </region>
+              <region name="Company Logo">
+                <section id="318282490" name="Company Logo" fragresid="673000929" fragresverid="673008371">
+                  <frag id="1462626295" name="Company Logo" no-match="error" type="text" fragresid="167601707" fragresverid="167612357">
+                    <lcij id="2087269002" name="Company Logo">
+                      <p style="Body1" xml:space="preserve">
+                        <imagelink src="https://dmtsca-u.corpads.local/public-cache167612357~4790a5c9.JPEG" width="6.50875cm" height="2.037291666666667cm" format="JPEG" horizdpi="96" vertdpi="96" alt="HNJH" checksum="4790a5c9" />
+                      </p>
+                    </lcij>
+                  </frag>
+                </section>
+              </region>
+              <region name="Company Return Address">
+                <section id="4029304" name="Company Return Address" fragresid="673000929" fragresverid="673008371">
+                  <frag id="357116752" name="Company Return Address" no-match="error" type="text" fragresid="167601699" fragresverid="167607776">
+                    <lcij id="527912402" name="Company Return Address">
+                      <p style="CompanyReturnAddress" align="left" xml:space="preserve">Three Penn Plaza East</p>
+                      <p style="CompanyReturnAddress" align="left" xml:space="preserve">Newark, NJ 07105-2200 </p>
+                      <p style="CompanyReturnAddress" xml:space="preserve">www.HorizonBlue.com </p>
+                    </lcij>
+                  </frag>
+                </section>
+              </region>
+              <region name="Body">
+                <section id="439919147" name="Body" fragresid="673000929" fragresverid="673008371">
+                  <frag id="1926050484" name="Header" no-match="error" type="text" fragresid="673000929" fragresverid="673008371">
+                    <lcij id="627142403" name="Header">
+                      <table width="100%" style="TableStyle1">
+                        <col width="21.51%" />
+                        <col width="78.49%" />
+                        <tablebody>
+                          <row>
+                            <cell>
+                              <p xml:space="preserve">PP-14C </p>
+                            </cell>
+                            <cell>
+                              <p xml:space="preserve">
+                                <var name="PNORequest.letterSequenceNo" type="string">2</var>
+                              </p>
+                            </cell>
+                          </row>
+                        </tablebody>
+                      </table>
+                      <p style="Body1" xml:space="preserve">
+                        <var name="getSystemVariables.getCurrentDate" type="date" format="MMMM d, yyyy">February 5, 2018</var>
+                      </p>
+                    </lcij>
+                  </frag>
+                  <frag id="154562862" name="Address" no-match="error" type="text" fragresid="673000929" fragresverid="673008371">
+                    <lcij id="202354031" name="Address">
+                      <p style="Body1" xml:space="preserve">
+                        <var name="PNORequest.providerName" type="string">RAJENDRASIXUAT</var>
+                      </p>
+                      <p style="BodySingle1KeepTogether" xml:space="preserve">
+                        <var name="PNORequest.practitionerInfo.practitionerAddress.addressLine1" type="string">34 PINE HILL RD</var> <var name="PNORequest.practitionerInfo.practitionerAddress.addressLine2" type="string" /></p>
+                      <p style="BodySingle1" xml:space="preserve">
+                        <var name="PNORequest.practitionerInfo.practitionerAddress.city" type="string">Annandale</var>, <var name="PNORequest.practitionerInfo.practitionerAddress.stateCd" type="string">NJ</var> <var name="PNORequest.practitionerInfo.practitionerAddress.zipCode" type="string">08801</var></p>
+                    </lcij>
+                  </frag>
+                  <frag id="1498977060" name="Subject Line" no-match="error" type="text" fragresid="673000929" fragresverid="673008371">
+                    <lcij id="324771243" name="Subject Line">
+                      <p style="Body2" xml:space="preserve">Re: Participation status for OMNIA plans</p>
+                      <p style="Body1" xml:space="preserve">Dear <var name="PNORequest.providerName" type="string">RAJENDRASIXUAT</var>:</p>
+                    </lcij>
+                  </frag>
+                  <frag id="1138737002" name="Body" no-match="error" type="text" fragresid="673000929" fragresverid="673008371">
+                    <lcij id="733356539" name="Body">
+                      <p style="Body1" xml:space="preserve">Horizon Blue Cross Blue Shield of New Jersey is pleased to offer our OMNIA health insurance plans beginning in 2016. These new plans are designed to meet the needs of our customers by helping to improve quality of care while keeping member costs low.</p>
+                      <p style="Body1" xml:space="preserve">All participating Horizon Managed Care Network physicians, other health care professionals and in-network hospitals will be participating with our OMNIA plans; however, members enrolled in OMNIA plans will have lower cost sharing when they use physicians, other healthcare professionals and hospitals with the OMNIA Tier 1 designation. </p>
+                      <p style="Body1" xml:space="preserve">Horizon BCBSNJ conducted an extensive evaluation to determine tier status. <b>As a result of our evaluation <var name="PNORequest.providerName" type="string">RAJENDRASIXUAT</var>, <var name="PNORequest.TIN" type="string">100-02-9017</var>, will be designated as OMNIA Tier 1 for the OMNIA plans.</b></p>
+                      <p style="Body1" align="left" xml:space="preserve">
+                        <b>Here are a few important details you should know:</b>
+                      </p>
+                      <p style="Body1" align="left" xml:space="preserve" />
+                      <table width="100%">
+                        <col width="5.43%" />
+                        <col width="94.57%" />
+                        <tablebody>
+                          <row>
+                            <cell>
+                              <p style="BodySingle1KeepTogether" align="right" xml:space="preserve">-</p>
+                            </cell>
+                            <cell>
+                              <p style="BodySingle1" xml:space="preserve">To make it easier for members to understand their cost sharing responsibilities, all physicians and other health care professionals affiliated with, or who practice under or on behalf of a group practice, will participate with OMNIA plans at the same tier when treating members under the group Tax ID Number (TIN).</p>
+                            </cell>
+                          </row>
+                          <row>
+                            <cell>
+                              <p style="BodySingle1KeepTogether" align="right" xml:space="preserve">-</p>
+                            </cell>
+                            <cell>
+                              <p style="BodySingle1" xml:space="preserve">Reimbursement for services provided to members enrolled in OMNIA will be at the managed care fee schedule.</p>
+                            </cell>
+                          </row>
+                          <row height="0.873124986886978cm">
+                            <cell>
+                              <p style="BodySingle1KeepTogether" align="right" xml:space="preserve">-</p>
+                            </cell>
+                            <cell>
+                              <p style="BodySingle1" xml:space="preserve">There are no out-of-network benefits offered in OMNIA plans, except in the event of an emergency.</p>
+                            </cell>
+                          </row>
+                          <row height="0.873124986886978cm">
+                            <cell>
+                              <p style="BodySingle1KeepTogether" align="right" xml:space="preserve">-</p>
+                            </cell>
+                            <cell>
+                              <p style="BodySingle1" xml:space="preserve">Our <i>Online Doctor &amp; Hospital Finder</i> reflects practitioners OMNIA tier status for each location.</p>
+                            </cell>
+                          </row>
+                        </tablebody>
+                      </table>
+                      <p style="BodySingle1KeepTogether" xml:space="preserve" />
+                      <p style="BodySingle1KeepTogether" xml:space="preserve">
+                        <b>Review Your Practice Listing</b>
+                      </p>
+                      <p style="Body1KeepTogether2" xml:space="preserve">We encourage all group practices to review the listing of affiliated physicians and/or other health care professionals on our online <i>Provider Data Maintenance </i>tool. Log on to <b>NaviNet.net</b> and from the <i>Horizon BCBSNJ Plan Central </i>page:</p>
+                      <table width="100%">
+                        <col width="5.81%" />
+                        <col width="94.19%" />
+                        <tablebody>
+                          <row>
+                            <cell>
+                              <p style="BodySingle1KeepTogether" align="right" xml:space="preserve">-</p>
+                            </cell>
+                            <cell>
+                              <p style="BodySingle1KeepTogether" xml:space="preserve">Select <i>Provider Data Maintenance</i> and then select <i>Group Maintenance</i>. </p>
+                            </cell>
+                          </row>
+                          <row>
+                            <cell>
+                              <p style="BodySingle1KeepTogether" align="right" xml:space="preserve">-</p>
+                            </cell>
+                            <cell>
+                              <p style="BodySingle1KeepTogether" xml:space="preserve">From the options listed, select <i>Remove a practitioner from a practice location</i>. (Selecting this tab does not automatically remove a practitioner.) </p>
+                            </cell>
+                          </row>
+                        </tablebody>
+                      </table>
+                      <p style="Body1KeepTogether2" xml:space="preserve">Please review this listing to ensure that no inaccuracies exist. <b>You do not need to take any action if the information is accurate.</b> If inaccuracies are identified, please access NaviNet<imagelink src="https://dmtsca-u.corpads.local/public-cache673008371~e4a67e04.PNG" width="0.3159358018450651cm" height="0.29066093769745993cm" format="PNG" horizdpi="200.9902" vertdpi="200.9902" alt="R Symbol" checksum="e4a67e04" />'s <i>Group Maintenance</i> tool to make demographic changes or to add or remove an affiliated practitioner.</p>
+                      <p style="Body1KeepTogether2" xml:space="preserve">Our Physician Agreements allow us to establish tiers of physicians and other health care professionals for certain products without requiring the inclusion of all participating practitioners in that same tier.</p>
+                      <p style="Body1KeepTogether2" xml:space="preserve">If you have additional questions, please call Physician Services at <b>1-800-624-1110,</b> Monday through Friday, between 8 a.m. and 5 p.m., Eastern Time.</p>
+                      <p style="Body1KeepTogether2" xml:space="preserve">Thank you for your participation and for the care you provide to your patients, our members.</p>
+                    </lcij>
+                  </frag>
+                  <section id="699108919" name="Signature" fragresid="167601721" fragresverid="673001803">
+                    <frag id="2024070133" name="Signature" no-match="error" type="text" fragresid="167601721" fragresverid="673001803">
+                      <lcij id="1925853316" name="Signature">
+                        <table width="100%" style="TableStyle2">
+                          <col width="100%" />
+                          <tablebody>
+                            <row>
+                              <cell>
+                                <p xml:space="preserve" />
+                              </cell>
+                            </row>
+                          </tablebody>
+                        </table>
+                        <p style="Body1KeepTogether" xml:space="preserve">Sincerely,</p>
+                      </lcij>
+                    </frag>
+                    <frag id="941801832" name="Signature Image" no-match="error" type="text" fragresid="167601721" fragresverid="673001803">
+                      <lcij id="2085098234" name="Signature Image">
+                        <p style="BodySingle1KeepTogether" xml:space="preserve">
+                          <imagelink src="https://dmtsca-u.corpads.local/public-cache673001803~24012730.JPEG" width="10.689166666666667cm" height="3.0691666666666664cm" format="JPEG" horizdpi="96" vertdpi="96" checksum="24012730" />
+                        </p>
+                      </lcij>
+                    </frag>
+                  </section>
+                  <frag id="527806126" name="Navinet Trademark" no-match="error" type="text" fragresid="673000929" fragresverid="673008371">
+                    <lcij id="1437839420" name="Navinet Trademark">
+                      <p style="Footer1" xml:space="preserve">Navinet<imagelink src="https://dmtsca-u.corpads.local/public-cache673008371~e4a67e04.PNG" width="0.3159358018450651cm" height="0.29066093769745993cm" format="PNG" horizdpi="200.9902" vertdpi="200.9902" alt="R Symbol" checksum="e4a67e04" /> is a registered mark of NaviNet, Inc.</p>
+                    </lcij>
+                  </frag>
+                </section>
+              </region>
+              <region name="Footer">
+                <section id="1540348239" name="Footer" fragresid="673000929" fragresverid="673008371">
+                  <frag id="395318481" name="MBPC Footer" no-match="error" type="text" fragresid="673000929" fragresverid="673008371">
+                    <lcij id="1734416586" name="MBPC Footer">
+                      <table width="100%">
+                        <col width="50%" />
+                        <col width="50%" />
+                        <tablebody>
+                          <row>
+                            <cell>
+                              <p style="FooterSingle1" xml:space="preserve">2430 (W1112)</p>
+                              <p style="FooterSingle1" xml:space="preserve">CMC0007286</p>
+                            </cell>
+                            <cell>
+                              <p style="FooterSingle1" align="right" xml:space="preserve">An Independent Licensee of the </p>
+                              <p style="FooterSingle1" align="right" xml:space="preserve">Blue Cross and Blue Shield Association</p>
+                            </cell>
+                          </row>
+                        </tablebody>
+                      </table>
+                    </lcij>
+                  </frag>
+                </section>
+              </region>
+            </content>
+          </review-channel>
+        </review-document>
+      </enclosures>
+    </review-channel>
+    <review-channel channel="6" destination="0" layout-resid="167601693" layout-resverid="167607740">
+      <properties>
+        <property name="print.config.resid" value="167602311" />
+        <property name="print.jobsetup" value="XML" />
+        <property name="disk.outputpath" value="/mnt/autofs/output/PNOPrintShare/ControlFile/PNO_24848_18036_0.xml" />
+        <property name="passed_Copy_Show" value="XML" />
+      </properties>
+      <content>
+        <region name="Body">
+          <section id="703551123" name="Text Channel" fragresid="167602310" fragresverid="157781315">
+            <frag id="1102944808" name="Control File" no-match="error" type="text" fragresid="167602310" fragresverid="157781315">
+              <lcij id="306450297" name="Control File">
+                <p style="BodySingle1" xml:space="preserve">&lt;?xml version="1.0" encoding="iso-8859-1"?&gt;</p>
+                <p style="BodySingle1" xml:space="preserve">&lt;index&gt;</p>
+                <p style="BodySingle1" xml:space="preserve">&lt;batchId&gt;<var name="getJobVariables.getBatchId" type="int">0</var>&lt;/batchId&gt;</p>
+                <p style="BodySingle1" xml:space="preserve">&lt;batchTransactionId&gt;<var name="getJobVariables.getTransactionNo" type="int">1</var>&lt;/batchTransactionId&gt;</p>
+                <p style="BodySingle1" xml:space="preserve">&lt;clientTransactionId&gt;<var name="PNORequest.clientTransactionId" type="int" format="###0">24848</var>&lt;/clientTransactionId&gt;</p>
+                <p style="BodySingle1" xml:space="preserve">&lt;letterType&gt;<var name="PNORequest.letterType" type="string">ANCILLARY_OMNIA_TIER1</var>&lt;/letterType&gt;</p>
+                <p style="BodySingle1" xml:space="preserve">&lt;documentDate&gt;<var name="getSystemVariables.getCurrentDate" type="date" format="MM/dd/yyyy" locale="en">02/05/2018</var>&lt;/documentDate&gt;</p>
+                <p style="BodySingle1" xml:space="preserve">&lt;archivefileName&gt;<var name="allOtherFileName" type="any">PNO_24848_18036_0.pdf</var>&lt;/archivefileName&gt;</p>
+                <p style="BodySingle1" xml:space="preserve">&lt;/index&gt;</p>
+              </lcij>
+            </frag>
+          </section>
+        </region>
+      </content>
+      <enclosures />
+    </review-channel>
+  </review-document>
+</review-case>

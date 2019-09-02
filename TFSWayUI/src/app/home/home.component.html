@@ -1,0 +1,156 @@
+﻿<div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableHead"><b>Project List</b></div>
+            <div class="divTableHead"></div>
+        </div>
+
+        <div class="divTableBody">
+            <div style="margin:20px;">
+                <div *ngIf="isAdmin">
+                    <button class="btn btn-success btn-circle pull-right" (click)="add()" title="Add Project">
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </button>
+                </div>
+                <ng-progress></ng-progress>
+                <div class="alert-danger">{{errorMessage}}</div>
+
+                <div class="input-group">
+                    <input type="text" class="form-control" name="search" [(ngModel)]="search"
+                           aria-describedby="basic-addon1">
+                    <span class="input-group-addon" id="basic-addon1">Search</span>
+                </div>
+
+                <table class="table table-bordered table-condensed">
+                    <thead class="thead-inverse">
+                        <tr *ngIf="projects.length >0">
+                            <th (click)="setOrder('group.groupName')">
+                                Group Name
+                                <span class="glyphicon sort-icon" *ngIf="order =='group.groupName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+
+                            <th (click)="setOrder('company.companyName')">
+                                Company Name
+                                <span class="glyphicon sort-icon" *ngIf="order =='company.companyName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+
+                            <th (click)="setOrder('project.projectName')">
+                                Project Name
+                                <span class="glyphicon sort-icon" *ngIf="order =='project.projectName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+
+                            <th (click)="setOrder('project.projectSize')">
+                                Project Size
+                                <span class="glyphicon sort-icon" *ngIf="order =='project.projectSize'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+
+
+
+                            <th (click)="setOrder('project.totalDebt')">
+                                Debt Amount
+                                <span class="glyphicon sort-icon" *ngIf="order =='project.totalDebt'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+
+                            <th *ngIf="isAdmin" (click)="setOrder('supervisor?.lastName')">
+                                Supervisor
+                                <span class="glyphicon sort-icon" *ngIf="order =='supervisor?.lastName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+
+                            <th (click)="setOrder('projectManager?.lastName')">
+                                Project Manager
+                                <span class="glyphicon sort-icon" *ngIf="order =='projectManager?.lastName?'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+
+                            <th (click)="setOrder('project.status')">
+                                Status
+                                <span class="glyphicon sort-icon" *ngIf="order =='project.status'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+
+                            <th>
+                                Stage
+                                <span></span>
+                            </th>
+
+                            <th (click)="setOrder('project.projectStartDate')">
+                                Start Date
+                                <span class="glyphicon sort-icon" *ngIf="order =='project.projectStartDate'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+
+                            <th (click)="setOrder('project.projectEndDate')">
+                                End Date
+                                <span class="glyphicon sort-icon" *ngIf="order =='project.projectEndDate'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+                            <th *ngIf="activeuserdesignation=='Admin' || activeuserdesignation == 'PM'">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr (click)="setactive(pc)" *ngFor="let pc of projects| filter: search |orderBy: order:reverse:'case-insensitive'| pageditems: pager ;" [class.active]="pc.project.projectId == selectedProject">
+
+                            <td>{{pc.group.groupName }}</td>
+                            <td>{{pc.company.companyName }}</td>
+                            <td>{{pc.project.projectName }}</td>
+                            <td>{{pc.project.projectSize }} {{pc.project?.projectCapacityUnit}}</td>
+                            <td>{{pc.project.totalDebt}} {{pc.project?.projectTariffUnit}}</td>
+                            <td *ngIf="isAdmin">{{ pc.supervisor !=null?  pc.supervisor.lastName + ",": "" }}  {{pc.supervisor !=null? pc.supervisor.firstName : ""}}</td>
+                            <td>{{pc.projectManager !=null? pc.projectManager.lastName + ",": "" }} {{ pc.projectManager != null ? pc.projectManager.firstName : ""}}</td>
+                            <td>{{pc.project.status}}</td>
+                            <td><a [routerLink]="['/dashboard/projectcurrentstatus']">{{pc.project.currentStage}}</a></td>
+                            <td>{{pc.project.projectStartDate | date :'dd/MMM/yyyy'}}</td>
+                            <td>{{pc.project.projectEndDate | date :'dd/MMM/yyyy'}}</td>
+                            <td style="width: 70px;" *ngIf="activeuserdesignation=='Admin' || activeuserdesignation == 'PM'">
+                                <i class="glyphicon glyphicon-edit pointer fa-lg"
+                                   (click)="edit(pc.project.projectId)" title="Edit"></i>
+                                <i class="glyphicon glyphicon-trash pointer fa-lg"
+                                   (click)="delete(pc)" title="Delete"></i>
+                            </td>
+
+                        </tr>
+                        <tr *ngIf="!projects || projects.length==0">
+                            <td colspan="7">No Projects Available..............</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <table cellspacing="10">
+                    <tr>
+                        <td>
+                            <div>
+                                <ul *ngIf="pager.pages && pager.pages.length" class="pagination pagination-sm">
+                                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                        <a (click)="setPage(1)"> First </a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                        <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                                    </li>
+                                    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                                        <a (click)="setPage(page)">{{page}}</a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                        <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                        <a (click)="setPage(pager.totalPages)">Last</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+
+                    </tr>
+
+                </table>
+
+
+                <div class="divTableRow">
+                    <div class="divTableCell">      </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+                <div class="divTableRow">
+                    <div class="divTableCell">    </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

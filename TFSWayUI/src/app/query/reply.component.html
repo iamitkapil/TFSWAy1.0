@@ -1,0 +1,44 @@
+﻿<form [formGroup]="replyForm" (ngSubmit)="save()" novalidate>
+    <div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableHead"><b>Add {{title}}</b></div>
+                <div class="divTableHead"></div>
+            </div>
+            <ng-progress></ng-progress>
+            <div class="alert-danger">{{errorMessage}}</div>
+
+            <div class="divTableRow" *ngIf="IsReplyAdd">
+                <div class="divTableCell">Query</div>
+                <div class="divTableCell_2">
+                    <textarea class="form-control" rows="2" formControlName="QueryText"></textarea>
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Reply</div>
+                <div class="divTableCell_2">
+                    <textarea class="form-control" rows="2" formControlName="ReplyText"></textarea>
+                </div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell"></div>
+                <div class="divTableCell_2">
+                    <input type="submit"
+                           class="btn btn-primary"
+                           value="Save" />&nbsp;<input type="button" class="btn btn-warning" value="Cancel" (click)="cancel()" />
+                </div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">      </div>
+                <div class="divTableCell_2"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">    </div>
+                <div class="divTableCell_2"></div>
+            </div>
+
+        </div>
+    </div>
+</form>

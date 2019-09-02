@@ -1,0 +1,87 @@
+﻿.divTable {
+    font-size: 77%;
+    font-family: "Myriad Web",Verdana,Helvetica,Arial,sans-serif;
+}
+
+.divTable {
+    display: table;
+    width: 100%;
+}
+
+.divTableRow {
+    display: table-row;
+}
+
+.divTableRow_2 {
+    display: table-row;
+    background-color: #eeeeee;
+}
+
+.divTableHeading {
+    background-color: #EEE;
+    display: table-header-group;
+}
+
+.divTableCell {
+    border: 0px solid #eeeeee;
+    display: table-cell;
+    padding: 8px 10px;
+    width: 27%;
+}
+
+.divTableCell_2 {
+    border: 0px solid #eeeeee;
+    display: table-cell;
+    padding: 8px 10px;
+    width: 63%;
+}
+
+.divTableHead {
+    border: 0px;
+    background-color: #a31d21;
+    display: table-cell;
+    padding: 3px 10px;
+    color: white;
+    font-size: 15px;
+}
+
+.divTableHeading {
+    background-color: #EEE;
+    display: table-header-group;
+    font-weight: bold;
+}
+
+.divTableFoot {
+    background-color: #EEE;
+    display: table-footer-group;
+    font-weight: bold;
+}
+
+.divTableBody {
+    display: table-row-group;
+}
+
+
+.Innertable {
+    border-collapse: collapse;
+}
+
+    .Innertable td {
+        border: 1px solid black;
+    }
+
+    .Innertable tr:first-child td {
+        border-top: 0;
+    }
+
+    .Innertable tr td:first-child {
+        border-left: 0;
+    }
+
+    .Innertable tr:last-child td {
+        border-bottom: 0;
+    }
+
+    .Innertable tr td:last-child {
+        border-right: 0;
+    }

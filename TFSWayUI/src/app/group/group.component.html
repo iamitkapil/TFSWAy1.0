@@ -1,0 +1,92 @@
+﻿<form [formGroup]="groupForm" (ngSubmit)="save()" novalidate>
+    <div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableHead"><b>{{title}} Group Details</b></div>
+                <div class="divTableHead"></div>
+            </div>
+            
+            <div class="divTableRow">
+                <font color="Red"> {{errorMessage}} </font>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Group Name</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="groupName" />
+                    <span style="color: red;" *ngIf="groupName.invalid && (groupName.dirty || submitted)">
+                        <label *ngIf="groupName.errors.required">
+                            Group  Name is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Company Name</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="companyName" />
+                    <span style="color: red;" *ngIf="companyName.invalid && (companyName.dirty || submitted)">
+                        <label *ngIf="companyName.errors.required">
+                            Company name is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">Registered Address</div>
+                <div class="divTableCell_2">
+                    <textarea formControlName="registeredAddress"></textarea>
+                    <span style="color: red;" *ngIf="registeredAddress.invalid && (registeredAddress.dirty || submitted)">
+                        <label *ngIf="registeredAddress.errors.required">
+                            Registered Address is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <!--<div class="divTableRow_2">
+                <div class="divTableCell">Site Address</div>
+                <div class="divTableCell_2">
+
+                    <textarea formControlName="siteAdress"></textarea>
+                    <span style="color: red;" *ngIf="siteAdress.invalid && (siteAdress.dirty || submitted)">
+                        <label *ngIf="siteAdress.errors.required">
+                            Site Address is required
+                        </label>
+                    </span>
+                </div>
+            </div>-->
+
+            <!--<div class="divTableRow">
+                <div class="divTableCell">Project Name</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="projectName" />
+                    <span style="color: red;" *ngIf="projectName.invalid && (projectName.dirty || submitted)">
+                        <label *ngIf="projectName.errors.required">
+                            Project Name is required
+                        </label>
+                    </span>
+                </div>
+            </div>-->
+            <div class="divTableRow">
+                <div class="divTableCell"></div>
+                <div class="divTableCell_2">
+                    <input type="submit"
+                           class="btn btn-primary"
+                           value="Save" />&nbsp;<input type="button" class="btn btn-warning" value="Back" (click)="cancel()" />
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell"></div>
+                <div class="divTableCell_2"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">    </div>
+                <div class="divTableCell_2"></div>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+

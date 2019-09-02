@@ -1,0 +1,69 @@
+﻿<div style="width:100%;margin-top:5px;"> <b>Group Name :</b>{{groupName}} &nbsp; &nbsp;  <i class="glyphicon glyphicon-arrow-right"></i> &nbsp; <b>Company Name :</b>{{companyName}} &nbsp; &nbsp;  <i class="glyphicon glyphicon-arrow-right"></i>  &nbsp; <b>Project Name :</b>{{projectName}} &nbsp; &nbsp;   </div>
+<div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableHead"><b>Project Plan List</b></div>
+            <div class="divTableHead"></div>
+        </div>
+
+        <div class="divTableBody">
+            <div style="margin:20px;">
+                <div *ngIf="projectplans.length <= 0 && !isAdmin">
+                    <button class="btn btn-success btn-circle pull-right" (click)="add()" title="Add projectplan">
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </button>
+                </div>
+                <ng-progress></ng-progress>
+                <div class="alert-danger">{{errorMessage}}</div>
+
+
+                <table class="table table-bordered">
+                    <thead class="thead-inverse">
+                        <tr *ngIf="projectplans.length >0">
+                            <th>
+                                Sr. No.
+                                <span></span>
+                            </th>
+                            <th>
+                                Project Plan Status
+                            </th>
+                            <th>
+                                Created Date
+                            </th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr *ngFor="let projectplan of projectplans;let i=index">
+                            <td>{{i+1}} </td>
+                            <td>Project Plan {{projectplan.projectPlanStatus}}</td>
+                            <td>{{projectplan.createdDate | date}}</td>
+                            <td style="width: 70px;">
+                                <i class="glyphicon glyphicon-edit pointer fa-lg"
+                                   (click)="edit(projectplan.projectPlanID,projectplan.projectPlanStatus)" title="Edit"></i>
+                                <i class="glyphicon glyphicon-trash pointer fa-lg"
+                                   (click)="delete(projectplan.projectPlanID)" title="Delete"></i>
+                            </td>
+                        </tr>
+                        <tr *ngIf="!projectplans || projectplans.length==0">
+                            <td colspan="7">Project Plan not available</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <div class="divTableRow">
+                    <div class="divTableCell">      </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+                <div class="divTableRow">
+                    <div class="divTableCell">    </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

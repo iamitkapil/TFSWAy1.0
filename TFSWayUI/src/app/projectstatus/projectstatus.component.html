@@ -1,0 +1,30 @@
+﻿<div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableHead"><b>Project Current Status</b></div>
+            <div class="divTableHead"></div>
+        </div>
+
+        <div style="margin:auto;height:90%;width:90%;">
+            <div style="display: block">
+                <canvas height="100%" baseChart
+                        [datasets]="barChartData"
+                        [labels]="barChartLabels"
+                        [colors]="barChartColors"
+                        [options]="barChartOptions"
+                        [legend]="barChartLegend"
+                        [chartType]="barChartType"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)"></canvas>
+            </div>
+        </div>
+        
+        <div class="divTableRow">
+            <input style="margin:auto;text-align:center;" type="button" class="btn btn-warning" value="Back" (click)="cancel()" />
+        </div>
+
+    </div>
+</div>
+
+
+

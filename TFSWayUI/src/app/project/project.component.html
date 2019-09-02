@@ -1,0 +1,461 @@
+﻿<form [formGroup]="projectForm" (ngSubmit)="save()">
+    <div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+        <div class="divTableBody">
+            <!--<button class="btn btn-success btn-circle pull-left" (click)="ExportToExcel()" title="Export to Excel">
+                <i class="glyphicon glyphicon-print"></i>
+            </button>-->
+
+            <div class="divTableRow">
+                <div class="divTableHead"><b>Project Company Details</b></div>
+                <div class="divTableHead"></div>
+            </div>
+             <div class="divTableRow">
+                <font color="Red"> {{errorMessage}} </font>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Group Name</div>
+                <div class="divTableCell_2"><input type="text" value={{groupname}} disabled/></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Company Name</div>
+                <div class="divTableCell_2"><input type="text"  value={{companyname}} disabled/></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Project Name</div>
+                <div class="divTableCell_2"><input type="text" formControlName="projectName" disabled/></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Project Size</div>
+                <div class="divTableCell_2"><input type="text" formControlName="projectSize" disabled/>{{projectUnit}}</div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Project StartDate</div>
+                <div class="divTableCell_2"><input type="text" formControlName="projectStartDate" disabled /></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Project EndDate</div>
+                <div class="divTableCell_2"><input type="text" formControlName="projectEndDate" disabled/></div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Project Current Status</div>
+                <div class="divTableCell_2"><input type="text" formControlName="status" disabled/></div>
+            </div>
+            
+            <div class="divTableRow">
+                <div class="divTableCell">Date of Letter of Awards</div>
+                <div class="divTableCell"><input type="text" formControlName="loaDate" disabled /></div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Registered Address</div>
+                <div class="divTableCell_2"><textarea  rows="2" formControlName="registeredAddress" disabled></textarea></div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">CIN Number</div>
+                <div class="divTableCell"><input type="text" formControlName="cinNumber" /></div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Site Address</div>
+                <div class="divTableCell_2"><textarea  rows="2" formControlName="siteAddress"></textarea></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">PAN Number</div>
+                <div class="divTableCell_2"><input type="text" formControlName="pan" /></div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Date of Incorporation</div>
+                <div class="divTableCell_2">
+                    <my-date-picker name="incorporationDate" [options]="myDatePickerOptions" placeholder="select Date"
+                                    (dateChanged)="onDateChanged($event)" formControlName="incorporationDate"></my-date-picker>
+
+
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Project Country</div>
+                <div class="divTableCell_2"><input type="text" formControlName="country" /></div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Project State</div>
+                <div class="divTableCell_2"><input type="text" formControlName="state" /></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Plant Location</div>
+                <div class="divTableCell_2"><input type="text" formControlName="plantLocation" /></div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Plant type</div>
+                <div class="divTableCell_2"><input type="text" formControlName="planttype" disabled/></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Technology</div>
+                <div class="divTableCell_2"><input type="text" formControlName="technology" /></div>
+            </div>
+
+
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">Substation</div>
+                <div class="divTableCell_2"><input type="text" formControlName="substation" /></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Capacity (AC)</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="capacity_AC" />{{projectUnit}}
+                    <!--<select palceholder="Select" style="height:23px;" (change)="onChangeac($event.target.value)" formcontrolName="capacityACunit">
+                        <option value="MW">MW</option>
+                        <option value="KW">KW</option>
+                    </select>-->
+                    <span style="color: red;" *ngIf="capacity_AC.invalid && (capacity_AC.dirty || submitted)">
+                        <label *ngIf="capacity_AC.errors.pattern">
+                            Capacity (AC) should be in digits only
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Capacity (DC)</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="capacity_DC" />{{projectUnit}}
+                    <!--<select palceholder="Select" style="height:23px;" (change)="onChangedc($event.target.value)" formcontrolName="capacityDCunit">
+                        <option value="MW">MW</option>
+                        <option value="KW">KW</option>
+                    </select>-->
+                    <span style="color: red;" *ngIf="capacity_DC.invalid && (capacity_DC.dirty || submitted)">
+                        <label *ngIf="capacity_DC.errors.pattern">
+                            Capacity (DC) should be in digits only
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Total Cost</div>
+                <div class="divTableCell_2"><input type="text" formControlName="totalCost" disabled/> {{projecttariffunit}}</div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Cost (AC) </div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="costperMW_AC" disabled value='{{ calccostAC() }} '/>{{projecttariffunit}}/{{projectUnit}}
+                    <!--<select palceholder="Select" style="height:23px;">
+                        <option value="MW">MW</option>
+                        <option value="KW">KW</option>
+                    </select>-->
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Cost (DC)</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="costperMW_DC" disabled value='{{ calccostDC() }}'/>{{projecttariffunit}}/{{projectUnit}}
+                    <!--<select palceholder="Select" style="height:23px;">
+                        <option value="MW">MW</option>
+                        <option value="KW">KW</option>
+                    </select>-->
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Total Debt </div>
+                <div class="divTableCell_2"><input type="text" formControlName="totalDebt" disabled/> {{projecttariffunit}}</div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Total Equity</div>
+                <div class="divTableCell_2">
+                <input type="text" formControlName="totalEquity" disabled value='{{calcEquity()}}'/> {{projecttariffunit}}
+                    <!--<span style="color: red;" *ngIf="totalEquity.invalid && (totalEquity.dirty || submitted)">
+                        <label *ngIf="totalEquity.errors.pattern">
+                             Total Equityshould be in digits and upto 2 decimal places only
+                        </label>
+                    </span>-->
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Debt:Equity Ratio</div>
+                <div class="divTableCell_2"><input type="text" formControlName="debtEquityRatio" disabled value='{{ calcDebtIsToEquity() }}'/></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Min DSCR</div>
+                <div class="divTableCell_2">
+                <input type="text" formControlName="minDSCR" />
+                    <span style="color: red;" *ngIf="minDSCR.invalid && (minDSCR.dirty || submitted)">
+                        <label *ngIf="minDSCR.errors.pattern">
+                            Min DSCR should be in digits and upto 2 decimal places only
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Avg DSCR</div>
+                <div class="divTableCell_2">
+                <input type="text" formControlName="avgDSCR" />
+                    <span style="color: red;" *ngIf="avgDSCR.invalid && (avgDSCR.dirty || submitted)">
+                        <label *ngIf="avgDSCR.errors.pattern">
+                            Avg DSCR should be in digits and upto 2 decimal places only
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">IRR</div>
+                <div class="divTableCell_2">
+                <input type="text" formControlName="irr" /> %
+                    <span style="color: red;" *ngIf="irr.invalid && (irr.dirty || submitted)">
+                        <label *ngIf="irr.errors.pattern">
+                            IRR should be in digits and upto 2 decimal places only
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">CUF/Plant Load Factor</div>
+                <div class="divTableCell_2">
+                <input type="text" formControlName="cuf" /> %
+                    <span style="color: red;" *ngIf="cuf.invalid && (cuf.dirty || submitted)">
+                        <label *ngIf="cuf.errors.pattern">
+                            CUF/Plant Load Factor should be in digits and upto 2 decimal places only
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">SCOD</div>
+                <div class="divTableCell_2">
+                    <my-date-picker name="scod" [options]="myDatePickerOptions" placeholder="select Date"
+                                    (dateChanged)="onDateChanged($event)" formControlName="scod"></my-date-picker>
+                </div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">Tariff</div>
+                <div class="divTableCell_2">
+                <input type="text" formControlName="tariff" />
+                    <span style="color: red;" *ngIf="tariff.invalid && (tariff.dirty || submitted)">
+                        <label *ngIf="tariff.errors.pattern">
+                            Tariff should be in digits and upto 2 decimal places only
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">PPA Date</div>
+                <div class="divTableCell_2">
+                    <my-date-picker name="ppaDate" [options]="myDatePickerOptions" placeholder="select Date"
+                                    (dateChanged)="onDateChanged($event)" formControlName="ppaDate"></my-date-picker>
+
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">VGF</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="vgf" />
+                    <span style="color: red;" *ngIf="vgf.invalid && (vgf.dirty || submitted)">
+                        <label *ngIf="vgf.errors.pattern">
+                            VGF should be in digits and upto 2 decimal places only
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Discom</div>
+                <div class="divTableCell_2"><input type="text" formControlName="discom" /></div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">External Credit Rating (Company)</div>
+                <div class="divTableCell_2"><input type="text" formControlName="creditCompRating" /></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">External Credit Rating (Promoter)</div>
+                <div class="divTableCell_2"><input type="text" formControlName="creditPromRating" /></div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Shadow Rating by TFS</div>
+                <div class="divTableCell_2"><input type="text" formControlName="tfsShadowRating" /></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Door to door tenure</div>
+                <div class="divTableCell_2"><input type="text" formControlName="dtdTenure" /> Yrs</div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Repayment Period Proposed</div>
+                <div class="divTableCell_2"><input type="text" formControlName="repaymentPeriod" /> Yrs</div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">Preliminary screening date</div>
+                <div class="divTableCell_2">
+                    <my-date-picker name="preliminaryScrDate" [options]="myDatePickerOptions" placeholder="Select Date"
+                                    (dateChanged)="onDateChanged($event)" formControlName="preliminaryScrDate"></my-date-picker>
+                </div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">Required Land</div>
+                <div class="divTableCell_2"><input type="text" formControlName="requiredLand" /> Acres</div>
+            </div>
+
+            <!--<div class="divTableRow_2">
+                <div class="divTableCell">Director</div>
+                <div class="divTableCell_2">
+                    <!--<button title="Add Director" class=" btn-xs btn-success" name="Add Director" (click)="addDirector(associationtype,projectId)">
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </button>-->
+            <!--<table>
+                        <tr *ngFor="let director of directors;let i=index">
+                            <td>
+                                <div class="divTableCell_2">
+                                    <input type="text" readonly value="{{director.name}}" style="margin-left:-10px" />
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>-->
+            <!--<div class="divTableRow">
+                <div class="divTableCell">Authorized Person</div>
+                <div class="divTableCell_2">-->
+            <!--<button title="Add Authorized Person" class=" btn-xs btn-success" name="Add Authorized Person" (click)="addAuthorizedPerson(associationtype,projectId)">
+                <i class="glyphicon glyphicon-plus"></i>
+            </button>-->
+            <!--<table>
+                        <tr *ngFor="let authorisedperson of authorisedpersons;let i=index">
+                            <td>
+                                <div class="divTableCell_2">
+                                    <input type="text" readonly value="{{authorisedperson.name}}" style="margin-left:-10px" />
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">Shareholder</div>
+                <div class="divTableCell_2">-->
+            <!--<button title="Add Shareholder" class=" btn-xs btn-success" name="Add Shareholder" (click)="addShareholder(associationtype,projectId)">
+                <i class="glyphicon glyphicon-plus"></i>
+            </button>-->
+            <!--<table>
+                        <tr *ngFor="let shareholder of shareholders;let i=index">
+                            <td>
+                                <div class="divTableCell_2">
+                                    <input type="text" readonly value="{{shareholder.name}}" style="margin-left:-10px" />
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>-->
+
+            <div class="divTableRow">
+                <div class="divTableCell">O&M Contractor</div>
+                <div class="divTableCell_2"><input type="text" formControlName="omContractor" /></div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">EPC Contractor</div>
+                <div class="divTableCell_2"><input type="text" formControlName="epcContractor" /></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">TRA Banker</div>
+                <div class="divTableCell_2"><input type="text" formControlName="traBanker" /></div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Sanction Letter No</div>
+                <div class="divTableCell_2"><input type="text" formControlName="sanctionLetterNo" /></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Sanction Letter Date</div>
+                <div class="divTableCell_2">
+                    <my-date-picker name="sanctionLetterDate" [options]="myDatePickerOptions" placeholder="Select Date"
+                                    (dateChanged)="onDateChanged($event)" formControlName="sanctionLetterDate"></my-date-picker>
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">RTL date</div>
+                <div class="divTableCell_2">
+                    <my-date-picker name="rtLdate" [options]="myDatePickerOptions" placeholder="select Date"
+                                    (dateChanged)="onDateChanged($event)" formControlName="rtLdate"></my-date-picker>
+                </div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">Deed of Hypotheciation Date</div>
+                <div class="divTableCell_2">
+                    <my-date-picker name="deedofHypotheciationDate" [options]="myDatePickerOptions" placeholder="select Date"
+                                    (dateChanged)="onDateChanged($event)" formControlName="deedofHypotheciationDate"></my-date-picker>
+                </div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">Charge Creation of Hypotheciation Date</div>
+                <div class="divTableCell_2">
+                    <my-date-picker name="chargeHypotheciationDate" [options]="myDatePickerOptions" placeholder="select Date"
+                                    (dateChanged)="onDateChanged($event)" formControlName="chargeHypotheciationDate"></my-date-picker>
+                </div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">Deed of pledge Date</div>
+                <div class="divTableCell_2">
+                    <my-date-picker name="deedofpledgeDate" [options]="myDatePickerOptions" placeholder="select Date"
+                                    (dateChanged)="onDateChanged($event)" formControlName="deedofpledgeDate"></my-date-picker>
+                </div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">Charge Creation of pledge Date</div>
+                <div class="divTableCell_2">
+                    <my-date-picker name="chargepledgeDate" [options]="myDatePickerOptions" placeholder="select Date"
+                                    (dateChanged)="onDateChanged($event)" formControlName="chargepledgeDate"></my-date-picker>
+                </div>
+            </div>
+
+
+            <div class="divTableRow">
+                <div class="divTableCell">Indenture of Mortgage Date</div>
+                <div class="divTableCell_2">
+                    <my-date-picker name="iomDate" [options]="myDatePickerOptions" placeholder="select Date"
+                                    (dateChanged)="onDateChanged($event)" formControlName="iomDate"></my-date-picker>
+                </div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">Charge Creation of IOM Date</div>
+                <div class="divTableCell_2">
+                    <my-date-picker name="chargeiomDate" [options]="myDatePickerOptions" placeholder="select Date"
+                                    (dateChanged)="onDateChanged($event)" formControlName="chargeiomDate"></my-date-picker>
+                </div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">Mortgage Date</div>
+                <div class="divTableCell_2">
+                    <my-date-picker name="mortgageDate" [options]="myDatePickerOptions" placeholder="select Date"
+                                    (dateChanged)="onDateChanged($event)" formControlName="mortgageDate"></my-date-picker>
+                </div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">Charge Creation of Mortgage Date</div>
+                <div class="divTableCell_2">
+                    <my-date-picker name="chargemortgageDate" [options]="myDatePickerOptions" placeholder="select Date"
+                                    (dateChanged)="onDateChanged($event)" formControlName="chargemortgageDate"></my-date-picker>
+                </div>
+            </div>
+    
+            <div class="divTableRow">
+                <div class="divTableCell"></div>
+                <div class="divTableCell_2">
+                    <input type="submit"
+                           class="btn btn-primary"
+                           value="Save" />&nbsp;<input type="button" class="btn btn-warning" value="Back" (click)="cancel()" />
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">      </div>
+                <div class="divTableCell_2"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">    </div>
+                <div class="divTableCell_2"></div>
+            </div>
+        </div>
+    </div>
+</form>

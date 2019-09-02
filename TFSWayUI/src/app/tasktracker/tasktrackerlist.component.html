@@ -1,0 +1,130 @@
+﻿<div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableHead"><b>Task Tracker List</b></div>
+            <div class="divTableHead"></div>
+        </div>
+        <div class="divTableBody">
+            <div style="margin:20px;">
+                <button class="btn btn-success btn-circle pull-right" (click)="add()" title="Add Task Tracker">
+                    <i class="glyphicon glyphicon-plus"></i>
+                </button>
+                <div *ngIf="tasktrackers.length > 0">
+                    <button class="btn btn-success btn-circle pull-right" (click)="ExportToExcel()" title="Export to Excel">
+                        <i class="glyphicon glyphicon-export"></i>
+                    </button>
+                    <button class="btn btn-success btn-circle pull-right" (click)="ExportToMSWord()" title="Export to MSWord">
+                        <i class="glyphicon glyphicon-text-background"></i>
+                    </button>
+                </div>
+                <ng-progress></ng-progress>
+                <div class="alert-danger">{{errorMessage}}</div>
+
+                <div class="input-group" *ngIf="tasktrackers.length > 0">
+                    <input type="text" class="form-control" name="search" [(ngModel)]="search"
+                           aria-describedby="basic-addon1">
+                    <span class="input-group-addon" id="basic-addon1">Search</span>
+                </div>
+
+                <div id="exportgrid">
+                    <table class="table table-bordered">
+                        <thead class="thead-inverse">
+                            <tr *ngIf="tasktrackers.length >0">
+                                <th>
+                                    Sr. No.
+                                    <span></span>
+                                </th>
+
+                                <th (click)="setOrder('task')">
+                                    Activities
+                                    <span class="glyphicon sort-icon" *ngIf="order =='task'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+
+                                <th (click)="setOrder('responsible')">
+                                    Dependency
+                                    <span class="glyphicon sort-icon" *ngIf="order =='responsible'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+
+                                <th (click)="setOrder('planDate')">
+                                    Start Date
+                                    <span class="glyphicon sort-icon" *ngIf="order =='planDate'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+
+                                <th (click)="setOrder('status')">
+                                    Status
+                                    <span class="glyphicon sort-icon" *ngIf="order =='status'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+
+                                <th>
+                                    Send Reminder
+                                </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr *ngFor="let tasktracker of tasktrackers| filter: search | orderBy: order:reverse:'case-insensitive'| pageditems: pager;let i=index">
+                                <td>{{i+1}} </td>
+                                <td>{{tasktracker.task}}</td>
+                                <td>{{tasktracker.responsible}}</td>
+                                <td>{{tasktracker.planDate | date}}</td>
+                                <td>{{tasktracker.status}}</td>
+                                <td>
+                                    <button class="btn-xs btn-success" (click)="SendReminder(tasktracker.responsibleEmail,tasktracker.responsible,tasktracker.task)" title="Send Reminder">
+                                        <i class="glyphicon glyphicon-envelope"></i>
+                                    </button>
+                                </td>
+                                <td style="width: 70px;">
+                                    <i class="glyphicon glyphicon-trash pointer fa-lg"
+                                       (click)="delete(tasktracker.taskTrackerID)" title="Delete"></i>
+                                </td>
+                            </tr>
+                            <tr *ngIf="!tasktrackers || tasktrackers.length==0">
+                                <td colspan="7">No Task available</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <table cellspacing="7">
+                    <tr>
+                        <td>
+                            <div>
+                                <ul *ngIf="pager.pages && pager.pages.length" class="pagination pagination-sm">
+                                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                        <a (click)="setPage(1)"> First </a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                        <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                                    </li>
+                                    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                                        <a (click)="setPage(page)">{{page}}</a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                        <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                        <a (click)="setPage(pager.totalPages)">Last</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+
+                    </tr>
+
+                </table>
+                <div class="divTableRow">
+                    <div class="divTableCell">      </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+                <div class="divTableRow">
+                    <div class="divTableCell">    </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

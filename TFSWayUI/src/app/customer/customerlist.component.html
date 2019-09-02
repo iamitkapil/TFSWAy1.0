@@ -1,0 +1,129 @@
+﻿<!--Show : <count-customer *ngIf="customers" [all]="getTotalCustomerCount()" [two]="getTotalCustomerCountAjay()"
+                       (countselectedchanged)="oncustomercountradiobuttonchnage($event)"></count-customer>-->
+
+<h1>
+    Customer List
+    <button class="btn btn-success btn-circle pull-right" (click)="add()" title="Add Customer">
+        <i class="glyphicon glyphicon-plus"></i>
+    </button>
+</h1>
+<ng-progress></ng-progress>  
+<div class="alert-danger">{{errorMessage}}</div>
+
+<div class="input-group">
+    <input type="text" class="form-control" name="search" [(ngModel)]="search"
+           aria-describedby="basic-addon1">
+    <span class="input-group-addon" id="basic-addon1">Search</span>
+</div> 
+
+<table class="table table-bordered">
+    <thead>
+        <tr *ngIf="customers.length >0">
+            <th (click)="setOrder('customerId')">ID
+                <span class="glyphicon sort-icon" *ngIf="order =='customerId'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </th>
+            <th (click)="setOrder('customerFirstName')">First Name
+                <span class="glyphicon sort-icon" *ngIf="order =='customerFirstName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </th>
+            <th (click)="setOrder('customerLastName')">Last Name
+                <span class="glyphicon sort-icon" *ngIf="order =='customerLastName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </th>
+            <th (click)="setOrder('customerPhone')">Phone
+                <span class="glyphicon sort-icon" *ngIf="order =='customerPhone'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </th>
+            <th (click)="setOrder('customerEmail')">Email
+                <span class="glyphicon sort-icon" *ngIf="order =='customerEmail'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </th>
+            <th (click)="setOrder('customerDateofBirth')">Date of Birth
+                <span class="glyphicon sort-icon" *ngIf="order =='customerDateofBirth'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+      <!--<ng-container *ngFor="let customer of customers;trackBy:trackbyCustID;let i=index;let isFirst=first;let isLast=last;">-->
+      <!--      <tr *ngIf="selectedcustomercountradiobutton == 'All' || selectedcustomercountradiobutton == customer.customerFirstName"> -->
+        <tr *ngFor="let customer of pagedItems| filter: search | orderBy: order:reverse:'case-insensitive';trackBy:trackbyCustID;" [ngClass]="{'btn-primary': customer.customerId == currentId }">
+            <td>{{customer.customerId }}</td>
+            <td>{{customer.customerFirstName }}</td>
+            <td>{{customer.customerLastName}}</td>
+            <td>{{customer.customerPhone}}</td>
+            <td>{{customer.customerEmail}}</td>
+            <td>{{customer.customerDateofBirth}}</td>
+            <td style="width: 70px;">
+                <i class="glyphicon glyphicon-edit pointer fa-lg"
+                   (click)="edit(customer.customerId)" title="Edit" ></i>
+                <i class="glyphicon glyphicon-trash pointer fa-lg"
+                   (click)="delete(customer.customerId)" title="Delete"></i>
+                
+            </td>
+        </tr>
+        <!--<tr >
+            <td colspan="4">No of Customers: {{noofcustomers}} </td>
+            <td colspan="3">No of Pages: {{noofpages}}</td>
+        </tr>-->
+      <!--</ng-container>-->  
+        <tr *ngIf="!customers || customers.length==0">
+            <td colspan="7">Loading Customers..............</td>
+        </tr>
+        
+    </tbody>
+</table>
+<table cellspacing="10">
+    <tr >
+       
+        <td colspan="1">
+            <div class="dropdown"> 
+            <button ng-class="" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                items per page
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li *ngFor="let items of itemsperpage_json" [ngClass]="{active:itemsperpage === items.value}">
+                    <a (click)="setItemsPerPage(items.value)">{{items.value}}</a>
+                </li>
+            </ul>
+                <!--<select ng-model="selectedValue" class="form-control">
+                    <option *ngFor="let items of itemsperpage" [ngValue]="items" on>{{items.value}}</option>
+                </select>-->
+            </div>
+        </td>
+        
+        <td colspan="3" >
+            <div>
+                <ul *ngIf="pager.pages && pager.pages.length" class="pagination pagination-sm">
+                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                        <a (click)="setPage(1)"> << </a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                        <a (click)="setPage(pager.currentPage - 1)"> < </a>
+                    </li>
+                    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                        <a (click)="setPage(page)">{{page}}</a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                        <a (click)="setPage(pager.currentPage + 1)">></a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                        <a (click)="setPage(pager.totalPages)">>></a>
+                    </li>
+                </ul>
+            </div>
+        </td>
+       
+    </tr>
+   
+</table>   
+        
+
+<!--<div class="dropdown"></div>-->
+
+
+<br />
+<button (click)="getCustomers()"> refresh customer</button>
+<div class="fileUpload btn btn-primary" *ngIf="isUploadBtn">
+    <span>Upload</span>
+    <input type="file" id="btnUpload" value="Upload" multiple (change)="fileChange($event)" class="upload" />
+
+</div>
+

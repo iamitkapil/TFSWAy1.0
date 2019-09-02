@@ -1,0 +1,144 @@
+﻿<form [formGroup]="authorisedpersonForm" (ngSubmit)="save()" novalidate>
+    <div class="divTable" style="width:100%;border: 1px solid #000;margin-top:37px;">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableHead"><b>{{title}} Authorized Person</b></div>
+                <div class="divTableHead"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Agency Type</div>
+                <div class="divTableCell_2">
+                    <select palceholder="Select" (change)="onChange($event.target.value)" formControlName="agencyType" style="width:160px;height:23px;">
+                        <option *ngFor="let key of keys" [value]="agencytype[key]">{{agencytype[key]}}</option>
+                    </select><a [routerLink]="['/dashboard/agency/add']"> <b> Add Master Agency</b></a>
+                    <span style="color: red;" *ngIf="agencyType.invalid && (agencyType.dirty || submitted)">
+                        <label *ngIf="agencyType.errors.required">
+                            Agency Type is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow_2" *ngIf="showPromoters">
+                <div class="divTableCell">Promoter</div>
+                <div class="divTableCell_2">
+                    <select palceholder="Select" style="width:160px;height:23px;" formControlName="authorisedPersonPromoterId" (change)="onPromoterChange($event.target.value)">
+                        <option *ngFor="let promoter of promoters" value={{promoter.promoterId}}>{{promoter.name}}</option>
+                    </select>
+                    <span style="color: red;" *ngIf="authorisedPersonPromoterId.invalid && (authorisedPersonPromoterId.dirty || submitted)">
+                        <label *ngIf="authorisedPersonPromoterId.errors.required">
+                            Promoter is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="divTableRow_2" *ngIf="showAgencys" (change)="onAgencyChange($event.target.value)">
+                <div class="divTableCell">Agency Name</div>
+                <div class="divTableCell_2">
+                    <select palceholder="Select" style="width:160px;height:23px;" formControlName="agencyName">
+                        <option *ngFor="let agency of agencysname" value={{agency}}>{{agency}}</option>
+                    </select>
+                    <span style="color: red;" *ngIf="agencyName.invalid && (agencyName.dirty || submitted)">
+                        <label *ngIf="agencyName.errors.required">
+                            Agency Name is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="divTableRow_2" *ngIf="showAgencys && agencyName.value != ''">
+                <div class="divTableCell">Agency address</div>
+                <div class="divTableCell_2">
+                    <select palceholder="Select" style="width:160px;height:23px;" formControlName="authorisedPersonAgencyId">
+                        <option *ngFor="let agency of filteredagencys" value={{agency.agencyId}}>{{agency.agencyAddress}}</option>
+                    </select>
+                    <span style="color: red;" *ngIf="authorisedPersonAgencyId.invalid && (authorisedPersonAgencyId.dirty || submitted)">
+                        <label *ngIf="authorisedPersonAgencyId.errors.required">
+                            Agency Address is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">Name</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="name" [(ngModel)]=query (keyup)=filter($event)/>
+                    <div class="suggestions" *ngIf="filteredList.length > 0 && query.length>2">
+                        <ul *ngFor="let item of filteredList;let idx=index">
+                            <li [class.complete-selected]="idx == selectedIdx">
+                                <a (click)="select(item)">{{item.name}} , {{item.contactNumber}},{{item.email}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <span style="color: red;" *ngIf="name.invalid && (name.dirty || submitted)">
+                        <label *ngIf="name.errors.required">
+                            Name is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">Designation</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="role" />
+                    <!--<span style="color: red;" *ngIf="role.invalid && (role.dirty || submitted)">
+                        <label *ngIf="role.errors.required">
+                            Designation is required
+                        </label>
+                    </span>-->
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Contact Number</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="contactNumber" [textMask]="{mask: mask}" />
+                    <!--<span style="color: red;" *ngIf="contactNumber.invalid && (contactNumber.dirty || submitted)">
+                        <label *ngIf="contactNumber.errors.required">
+                            Contact Number is required
+                        </label>
+                    </span>-->
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Landline Number</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="landlineNumber" [textMask]="{mask: mask}" /></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Email Address</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="email" />
+                </div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">Do you want to add it as Coordinator ?</div>
+                <div class="divTableCell_2">
+                    <input type="checkbox" (change)="onCheckboxChange($event.target.checked)" formControlName="chkCoordinator" />
+                </div>
+            </div>
+            <input type="hidden" formControlName="isCoordinator" />
+            <input type="hidden" formControlName="agencyAddress" />
+
+            <div class="divTableRow">
+                <div class="divTableCell"></div>
+                <div class="divTableCell_2">
+                    <input type="submit"
+                           class="btn btn-primary"
+                           value="Save" />&nbsp;<input type="button" class="btn btn-warning" value="Cancel" (click)="cancel()" />
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">      </div>
+                <div class="divTableCell_2"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">    </div>
+                <div class="divTableCell_2"></div>
+            </div>
+
+        </div>
+    </div>
+</form>

@@ -1,0 +1,93 @@
+﻿<form [formGroup]="uploadFileForm" (ngSubmit)="save()" novalidate>
+    <div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableHead"><b>{{title}} Document</b></div>
+                <div class="divTableHead"></div>
+            </div>
+            <div class="divTableRow" *ngIf="IsAdd">
+                <div class="divTableCell">Document Name</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="documentName" />
+                    <span style="color: red;" *ngIf="documentName.invalid && (documentName.dirty || submitted)">
+                        <label *ngIf="documentName.errors.required">
+                            Document Name is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">Select File to upload</div>
+                <div class="divTableCell_2">
+                    <input type="file" style="height:23px;" id="btnUpload" value="Upload" (change)="fileChange($event)" formControlName="filePath" />
+                </div>
+            </div>
+
+            <div class="divTableRow" *ngIf="IsAdd">
+                <div class="divTableCell">Stage</div>
+                <div class="divTableCell_2">
+                    <select palceholder="Select" formControlName="stage" style="width:160px;height:23px;">
+                        <option value="Application">Application</option>
+                        <option value="Screening">Screening</option>
+                        <option value="Appraisal">Appraisal</option>
+                        <option value="Pre-Sanction">Pre-Sanction</option>
+                        <option value="Post-Sanction">Post-Sanction</option>
+                        <option value="Documentation">Documentation</option>
+                        <option value="Post-Documentation">Post-Documentation</option>
+                        <option value="First Disbursement">First Disbursement</option>
+                        <option value="Mortgage">Mortgage</option>
+                        <option value="Module Disbursement">Module Disbursement</option>
+                        <option value="Conditions to be complied 1 month prior to SCOD">Conditions to be complied 1 month prior to SCOD</option>
+                        <option value="Final Disbursement">Final Disbursement</option>
+                        <option value="Others">Others</option>
+                    </select>
+                    <span style="color: red;" *ngIf="stage.invalid && (stage.dirty || submitted)">
+                        <label *ngIf="stage.errors.required">
+                            Stage is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">Completed</div>
+                <div class="divTableCell_2">
+                    <select palceholder="Select" formControlName="completed" style="width:160px;height:23px;">
+                        <option value="Completed">Completed</option>
+                        <option value="Not Completed">Not Completed</option>
+                    </select>
+                    <span style="color: red;" *ngIf="completed.invalid && (completed.dirty || submitted)">
+                        <label *ngIf="completed.errors.required">
+                            Status is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow" *ngIf="IsAdd">
+                <div class="divTableCell">Do you want to add in Master Document ?</div>
+                <div class="divTableCell_2">
+                    <input type="checkbox" (change)="onCheckboxChange($event.target.checked)" formControlName="isMaster" />
+                </div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell"></div>
+                <div class="divTableCell_2">
+                    <input type="submit"
+                           class="btn btn-primary"
+                           value="Save" />&nbsp;<input type="button" class="btn btn-warning" value="Cancel" (click)="cancel()" />
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">      </div>
+                <div class="divTableCell_2"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">    </div>
+                <div class="divTableCell_2"></div>
+            </div>
+
+        </div>
+    </div>
+</form>

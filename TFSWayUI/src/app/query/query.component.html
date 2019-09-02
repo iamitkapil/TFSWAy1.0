@@ -1,0 +1,126 @@
+﻿<form [formGroup]="queryForm" (ngSubmit)="save()" novalidate>
+    <div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableHead"><b>{{title}} Queries & issues</b></div>
+                <div class="divTableHead"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Document</div>
+                <div class="divTableCell_2">
+                    <div class="suggestions">
+                        <ss-multiselect-dropdown [options]="documentListOption" [(ngModel)]="selectedDocumentIds" [texts]="dropdownText" [settings]="dropdownSettings" formControlName="RefDocument" (ngModelChange)="onChange($event)"></ss-multiselect-dropdown>
+                    </div>
+                </div>
+                <span style="color: red;" *ngIf="RefDocument.invalid && (RefDocument.dirty || submitted)">
+                    <label *ngIf="RefDocument.errors.required">
+                        Document is required
+                    </label>
+                </span>
+            </div>
+            <div class="divTableRow_2" *ngIf="IsAdd">
+                <div class="divTableCell">Queries & issues</div>
+                <div class="divTableCell_2">
+                    <textarea class="form-control" rows="2" formControlName="QueryText"></textarea>
+                    <span style="color: red;" *ngIf="QueryText.invalid && (QueryText.dirty || submitted)">
+                        <label *ngIf="QueryText.errors.required">
+                            Queries is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="divTableRow" *ngIf="IsAdd">
+                <div class="divTableCell">Reply</div>
+                <div class="divTableCell_2">
+                    <textarea class="form-control" rows="2" formControlName="Replytext"></textarea>
+                    <!--<span style="color: red;" *ngIf="Replytext.invalid && (QueryText.dirty || submitted)">
+                        <label *ngIf="Replytext.errors.required">
+                            Reply is required
+                        </label>
+                    </span>-->
+                </div>
+            </div>
+
+            <!--<div class="divTableRow_2">
+                <div class="divTableCell">Assigned To</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="AssignTo" />
+                    <span style="color: red;" *ngIf="AssignTo.invalid && (AssignTo.dirty || submitted)">
+                        <label *ngIf="AssignTo.errors.required">
+                            Assigned To is required
+                        </label>
+                    </span>
+                </div>
+            </div>-->
+            <!--<div class="divTableRow">
+                <div class="divTableCell">Assigned MailID</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="AssignToMailID" />
+                    <span style="color: red;" *ngIf="AssignToMailID.invalid && (AssignToMailID.dirty || AssignToMailID.submitted )">
+                        <label *ngIf="AssignToMailID.errors.required">
+                            Assigned To is required
+                        </label>
+                        <label *ngIf="AssignToMailID.errors.email">
+                            Email is invalid
+                        </label>
+                    </span>
+                </div>
+            </div>-->
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">Query Type</div>
+                <div class="divTableCell_2">
+                    <select palceholder="Select" formControlName="QueryType" style="width:160px;height:23px;">
+                        <option value="Critical">Critical</option>
+                        <option value="Not Critical">Not Critical</option>
+                    </select>
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Query Stage</div>
+                <div class="divTableCell_2">
+                    <select palceholder="Select" formControlName="Severity" style="width:160px;height:23px;">
+                        <option value="Preliminary">Preliminary</option>
+                        <option value="Detailed">Detailed</option>
+                    </select>
+
+                </div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">Status</div>
+                <div class="divTableCell_2">
+                    <select palceholder="Select" (change)="onStatusChange($event.target.value)" formControlName="Status" style="width:160px;height:23px;">
+                        <option value="Open">Open</option>
+                        <option value="Close">Close</option>
+                    </select>
+
+                </div>
+            </div>
+            <div class="divTableRow" *ngIf="IsCompleted">
+                <div class="divTableCell">Summary</div>
+                <div class="divTableCell_2">
+                    <textarea class="form-control" rows="2"></textarea>
+                </div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell"></div>
+                <div class="divTableCell_2">
+                    <input type="submit"
+                           class="btn btn-primary"
+                           value="Save" />&nbsp;<input type="button" class="btn btn-warning" value="Cancel" (click)="cancel()" />
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">      </div>
+                <div class="divTableCell_2"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">    </div>
+                <div class="divTableCell_2"></div>
+            </div>
+        </div>
+    </div>
+</form>

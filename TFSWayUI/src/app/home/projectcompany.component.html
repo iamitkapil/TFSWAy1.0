@@ -1,0 +1,248 @@
+﻿<form [formGroup]="projectForm" (ngSubmit)="save()" novalidate>
+    <div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableHead"><b>{{title}} Project Basic Details</b></div>
+                <div class="divTableHead"></div>
+            </div>
+            <div class="divTableRow">
+                <font color="Red"> {{errorMessage}} </font>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Group Name</div>
+                <div class="divTableCell_2">
+                    <select class="labelTop" palceholder="Select" (change)="onGroupChange($event.target.value)" formControlName="groupId" style="width:230px;height:23px;">
+                        <option *ngFor="let group of groups" value={{group.groupId}}>{{group.groupName}}</option>
+                    </select>
+                    <span style="color: red;" *ngIf="groupId.invalid && (groupId.dirty || submitted)">
+                        <label *ngIf="groupId.errors.required">
+                            Group Name is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Company Name</div>
+                <div class="divTableCell_2">
+                    <select class="labelTop" palceholder="Select" formControlName="companyId" style="width:230px;height:23px;">
+                        <option *ngFor="let company of groupCompanys" value={{company.companyId}}>{{company.companyName}}</option>
+                    </select>
+                    <span style="color: red;" *ngIf="companyId.invalid && (companyId.dirty || submitted)">
+                        <label *ngIf="companyId.errors.required">
+                            Company Name is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">Project Name</div>
+                <div class="divTableCell_2">
+                    <input class="labelTop" type="text" formControlName="projectName"  style="width:230px;height:23px;"/>
+                    <span style="color: red;" *ngIf="projectName.invalid && (projectName.dirty || submitted)">
+                        <label *ngIf="projectName.errors.required">
+                            Project Name is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Project Size</div>
+                <div class="divTableCell_2">
+                    <input class="labelTop" type="text" formControlName="projectSize" maxlength="8"  style="width:230px;height:23px;"/>
+                    <span style="color: red;" *ngIf="projectSize.invalid && (projectSize.dirty || submitted)">
+                        <label *ngIf="projectSize.errors.pattern">
+                            Project size should be in digits only
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">Plant Type</div>
+                <div class="divTableCell_2">
+                    <select palceholder="Select" formControlName="planttype" style="width:230px;height:23px;">
+                        <option value="Solar Power">Solar Power</option>
+                        <option value="Wind Power">Wind Power</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">Project Size Unit</div>
+                <div class="divTableCell_2">
+                    <select palceholder="Select" style="width:230px;height:23px;"  formControlName="projectCapacityUnit">
+                        <option value="MW">MW</option>
+                        <option value="KW">KW</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">Project Tariff Unit</div>
+                <div class="divTableCell_2">
+                    <select palceholder="Select" style="width:230px;height:23px;" (change)="onChangetariff($event.target.value)" formControlName="projectTariffUnit">
+                        <option value="Lakhs">Lakhs</option>
+                        <option value="Crores">Crores</option>
+                        <option value="Millions">Millions</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">Project Start Date</div>
+                <div class="divTableCell_2">
+                    <my-date-picker class="labelTop" name="projectStartDate" [options]="myDatePickerOptions" placeholder="select start date"
+                                    (dateChanged)="onDateChanged($event)" formControlName="projectStartDate"></my-date-picker>
+
+                    <span style="color: red;" *ngIf="projectStartDate.invalid && (projectStartDate.dirty || submitted)">
+                        <label *ngIf="projectStartDate.errors.required">
+                            Start Date is required
+                        </label>
+                        <label *ngIf="projectStartDate.errors.endDatesCompareIssue">
+                            Start Date can not greater than End Date
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Project End Date</div>
+                <div class="divTableCell_2">
+                    <my-date-picker class="labelTop" name="projectEndDate" [options]="myDatePickerOptions" placeholder="select end date"
+                                    (dateChanged)="onDateChanged($event)" formControlName="projectEndDate"></my-date-picker>
+
+                    <span style="color: red;" *ngIf="projectEndDate.invalid && (projectEndDate.dirty || submitted)">
+                        <label *ngIf="projectEndDate.errors.required">
+                            End Date is required
+                        </label>
+                        <label *ngIf="projectEndDate.errors.startDatesCompareIssue">
+                            End Date can not Less than Start Date
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">Debt Amount</div>
+                <div class="divTableCell_2">
+                    <input  class="labelTop" type="text" formControlName="totalDebt" style="width:230px;height:23px;"/> {{projecttariffunit}}
+                    <span style="color: red;" *ngIf="totalDebt.invalid && (totalDebt.dirty || submitted)">
+                        <!--<label *ngIf="totalDebt.errors.required">
+                        Debt Amount is required
+                    </label>-->
+                        <label *ngIf="totalDebt.errors.pattern">
+                            Debt should be in digits and upto 2 decimal places only
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="divTableRow">
+                <div class="divTableCell">Date of Letter of Awards</div>
+                <div class="divTableCell_2">
+                    <my-date-picker class="labelTop" name="loaDate" [options]="myDatePickerOptions" placeholder="select date of LOA"
+                                    (dateChanged)="onDateChanged($event)" formControlName="loaDate"></my-date-picker>
+                </div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">Registered Address</div>
+                <div class="divTableCell_2">
+                    <textarea class="labelTop" formControlName="registeredAddress"  style="width:230px;"></textarea>
+                </div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">Supervisor</div>
+                <div class="divTableCell_2">
+                    <select class="labelTop" formControlName="supervisorId" style="width:230px;height:23px;">
+                        <option *ngFor="let sp of supervisorlist" value={{sp.userID}}>{{sp.firstName}}&nbsp;{{sp.lastName}} </option>
+                    </select>
+                    <!--<span style="color: red;" *ngIf="supervisorId.invalid && (supervisorId.dirty || submitted)">
+                    <label *ngIf="supervisorId.errors.required">
+                        Supervisor is required
+                    </label>
+                </span>-->
+                </div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">Project Manager</div>
+                <div class="divTableCell_2">
+                    <select class="labelTop" formControlName="projectManagerId" style="width:230px;height:23px;">
+                        <option *ngFor="let pm of pmList" value={{pm.userID}}>{{pm.firstName}}&nbsp;{{pm.lastName}} </option>
+                    </select>
+                    <!--<span style="color: red;" *ngIf="projectManagerId.invalid && (projectManagerId.dirty || submitted)">
+                    <label *ngIf="projectManagerId.errors.required">
+                        Project Manager is required
+                    </label>
+                </span>-->
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Stage</div>
+                <div class="divTableCell_2">
+                    <select class="labelTop" palceholder="Select" formControlName="currentStage" style="width:230px;height:23px;">
+                        <option value="Application">Application</option>
+                        <option value="Screening">Screening</option>
+                        <option value="Appraisal">Appraisal</option>
+                        <option value="Pre-Sanction">Pre-Sanction</option>
+                        <option value="Post-Sanction">Post-Sanction</option>
+                        <option value="Documentation">Documentation</option>
+                        <option value="Post-Documentation">Post-Documentation</option>
+                        <option value="First Disbursement">First Disbursement</option>
+                        <option value="Mortgage">Mortgage</option>
+                        <option value="Subsequent Disbursement">Subsequent Disbursement</option>
+                        <option value="Conditions to be complied 1 month prior to SCOD">Conditions to be complied 1 month prior to SCOD</option>
+                        <option value="Final Disbursement">Final Disbursement</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="divTableRow_2" *ngIf="!IsNew">
+                <div class="divTableCell">Status</div>
+                <div class="divTableCell_2">
+                    <select class="labelTop" palceholder="Select" (change)="onChange($event.target.value)" formControlName="status" style="width:230px;height:23px;">
+                        <option value="On Going">On Going</option>
+                        <option value="Completed">Completed</option>
+                        <option value="On Hold">On Hold</option>
+                        <option value="Resume">Resume</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="divTableRow" *ngIf="isOnHold">
+                <div class="divTableCell">Reason</div>
+                <div class="divTableCell_2">
+                    <textarea class="labelTop" rows="2" formControlName="reason"  style="width:230px;"></textarea>
+                </div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell"></div>
+                <div class="divTableCell_2">
+                    <input type="submit"
+                           class="btn btn-primary"
+                           value="Save" />&nbsp;<input type="button" class="btn btn-warning" value="Back" (click)="cancel()" />
+                </div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">      </div>
+                <div class="divTableCell_2"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">    </div>
+                <div class="divTableCell_2"></div>
+            </div>
+
+
+        </div>
+            </div>
+</form>
+
+<!--<p>Form value: {{ projectForm.value | json }}</p>
+<p>Form status: {{ projectForm.status | json }}</p>-->
+

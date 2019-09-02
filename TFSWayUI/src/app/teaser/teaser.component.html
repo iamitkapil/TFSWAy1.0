@@ -1,0 +1,291 @@
+﻿<form [formGroup]="teaserForm" (ngSubmit)="save()" novalidate>
+    <div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableHead"><b>{{title}} Teaser</b></div>
+            </div>
+        </div>
+        <div class="divTableBody">
+            <div style="margin:20px;">
+                <button class="btn btn-success btn-circle pull-right" (click)="ExportToMSWord()" title="Export to MSWord">
+                    <i class="glyphicon glyphicon-print"></i>
+                </button>
+                <div id="exportgrid">
+                    <table width="100%" border="0" style="text-align:center">
+                        <tr>
+                            <td><b>{{objProject?.nameoftheCompany}}</b></td>
+                        </tr>
+                        <tr>
+                            <td><i>(Developed by {{objProject?.groupName}})</i></td>
+                        </tr>
+                    </table>
+                    <br />
+                    <br />
+                    <table width="100%" border="1" cellpadding="4" cellspacing="4">
+                        <tr>
+                            <td width="22%">Name of the Company</td>
+                            <td>{{objProject?.nameoftheCompany}}</td>
+                        </tr>
+                        <tr>
+                            <td>Registered Office</td>
+                            <td>{{objProject?.officeAddress}}</td>
+                        </tr>
+                        <tr>
+                            <td>Incorporation</td>
+                            <td>{{objProject?.incorporationDate | date: 'dd/MMM/yyyy' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Group</td>
+                            <td>
+                                
+                                <input type="text" formControlName="group" value="{{objProject?.groupName}}" />
+                                <!--<input type="text" formControlName="group" />-->
+                                <!--<span style="color: red;" *ngIf="group.invalid && (group.dirty || submitted)">
+                                    <label *ngIf="group.errors.required">
+                                        Group is required
+                                    </label>
+                                </span>-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Promoter</td>
+                            <td>
+                                {{objProject?.teaserModel?.promoter?.promoterName}} : <textarea formControlName="promoterDescription"></textarea>
+                                <span style="color: red;" *ngIf="promoterDescription.invalid && (promoterDescription.dirty || submitted)">
+                                    <label *ngIf="promoterDescription.errors.required">
+                                        Promoter Description is required
+                                    </label>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Board of Directors</td>
+                            <td>
+                                <table width="40%" border="1" style="border-color:#eeeeee" cellpadding="2" cellspacing="4">
+                                    <tr>
+                                        <td width="22%">Name</td>
+                                    </tr>
+                                    <tr *ngFor="let director of objProject?.teaserModel?.directors">
+                                        <td>{{director.directorName}}</td>
+                                    </tr>
+
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Shareholding Pattern</td>
+                            <td>
+                                <table width="100%" border="1" style="border-color:#eeeeee" cellpadding="2" cellspacing="4">
+                                    <tr>
+                                        <td>Category</td>
+                                        <td>No. of shares</td>
+                                        <td>Share Capital</td>
+                                        <td>%</td>
+                                    </tr>
+                                    <tr *ngFor="let shareholder of objShareHolders">
+                                        <td>{{shareholder.shareHolderName}}</td>
+                                        <td>{{shareholder.noofShares}}</td>
+                                        <td>{{shareholder.facevalue * shareholder.noofShares}}</td>
+                                        <td>{{((shareholder.facevalue * shareholder.noofShares)/TotalShareCapital*100).toFixed(2)}}</td>
+                                    </tr>
+                                    <tr *ngIf="!objOthers || objOthers.length > 0">
+                                        <td>Others</td>
+                                        <td>{{NoofOthersTotalShare}}</td>
+                                        <td>{{TotalOthersShareCapital}}</td>
+                                        <td>{{OthersPercentageShare.toFixed(2)}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total</td>
+                                        <td>{{NoofTotalshares}}</td>
+                                        <td>{{TotalShareCapital}}</td>
+                                        <td>{{PercentageShare.toFixed(2)}}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>External Credit Rating (Company)</td>
+                            <td>{{objProject?.creditCompRating}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Project</td>
+                            <td>
+                                <table width="100%" border="1" style="border-color:#eeeeee" cellpadding="2" cellspacing="4">
+                                    <tr>
+                                        <td width="22%">Project Name</td>
+                                        <td>{{objProject?.projectName}}</td>
+                                    </tr>
+                                    <!--<tr>
+                                        <td>Project Developer</td>
+                                        <td>-NA-</td>
+                                    </tr>-->
+                                    <tr>
+                                        <td>Project Capacity (AC)</td>
+                                        <td>{{objProject?.capacity_AC}} {{objProject?.projectCapacityUnit}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Project Capacity (DC)</td>
+                                        <td>{{objProject?.capacity_DC}} {{objProject?.projectCapacityUnit}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Plant Location</td>
+                                        <td>{{objProject?.plantLocation}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Plant Type</td>
+                                        <td>{{objProject?.planttype}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Technology</td>
+                                        <td>{{objProject?.technology}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Land Requirement</td>
+                                        <td>{{objProject?.requiredLand}} acres</td>
+                                    </tr>
+                                    <tr>
+                                        <td>EPC Contract</td>
+                                        <td>{{objProject?.epcContractor}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>O&M Arrangement</td>
+                                        <td>{{objProject?.omContractor}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Project Cost</td>
+                                        <td>{{objProject?.totalCost}} {{objProject?.projectTariffUnit}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Debt: Equity Ratio</td>
+                                        <td>{{objProject?.debtEquityRatio}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Debt Required</td>
+                                        <td>{{objProject?.termLoan}} {{objProject?.projectTariffUnit}} </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Door to Door Tenure</td>
+                                        <td>{{objProject?.dtdTenure}} Years</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Repayment Period proposed</td>
+                                        <td>{{objProject?.repaymentPeriod}} Years</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Expected ROI</td>
+                                        <td>
+                                            <input type="text" formControlName="expectedROI" />
+                                            <span style="color: red;" *ngIf="expectedROI.invalid && (expectedROI.dirty || submitted)">
+                                                <label *ngIf="expectedROI.errors.required">
+                                                    Expected ROI is required
+                                                </label>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Selling Arrangement</td>
+                                        <td>
+                                            <input type="text" formControlName="sellingArrangement" />
+                                            <span style="color: red;" *ngIf="sellingArrangement.invalid && (sellingArrangement.dirty || submitted)">
+                                                <label *ngIf="sellingArrangement.errors.required">
+                                                    Selling Arrangement is required
+                                                </label>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tarrif</td>
+                                        <td>{{objProject?.tariff}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Power Evacution</td>
+                                        <td>
+                                            <input type="text" formControlName="powerEvacuation" />
+                                            <span style="color: red;" *ngIf="powerEvacuation.invalid && (powerEvacuation.dirty || submitted)">
+                                                <label *ngIf="powerEvacuation.errors.required">
+                                                    Power Evacution is required
+                                                </label>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>PPA Signing Date</td>
+                                        <td>{{objProject?.ppaDate | date: 'dd/MMM/yyyy'}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>SCOD</td>
+                                        <td>{{objProject?.scod | date: 'dd/MMM/yyyy'}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>CUF/PLF</td>
+                                        <td>{{objProject?.cuf}}%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Proposed Security</td>
+                                        <td>
+                                            <input type="text" formControlName="proposedSecurity" />
+                                            <span style="color: red;" *ngIf="proposedSecurity.invalid && (proposedSecurity.dirty || submitted)">
+                                                <label *ngIf="proposedSecurity.errors.required">
+                                                    Proposed Security is required
+                                                </label>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Key Ratios</td>
+                            <td>
+                                <table width="100%" border="1" style="border-color:#eeeeee" cellpadding="2" cellspacing="4">
+                                    <tr>
+                                        <td width="22%">IRR</td>
+                                        <td>{{objProject?.irr}}%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Min DSCR</td>
+                                        <td>{{objProject?.minDSCR}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Average DSCR</td>
+                                        <td>{{objProject?.avgDSCR}}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Request</td>
+                            <td>
+                                <textarea formControlName="request"></textarea>
+                                <span style="color: red;" *ngIf="request.invalid && (request.dirty || submitted)">
+                                    <label *ngIf="request.errors.required">
+                                        Request is required
+                                    </label>
+                                </span>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div style="text-align:center;margin-top:20px;">
+                    <input type="submit"
+                           class="btn btn-primary"
+                           value="Save" />&nbsp;<input type="button" class="btn btn-warning" value="Cancel" (click)="cancel()" />
+                </div>
+
+                <div class="divTableRow">
+                    <div class="divTableCell">      </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+                <div class="divTableRow">
+                    <div class="divTableCell">    </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!--<p>Form value: {{ teaserForm.value | json }}</p>
+<p>Form value: {{ teaserForm.valid | json }}</p>-->

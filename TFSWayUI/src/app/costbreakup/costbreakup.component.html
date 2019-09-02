@@ -1,0 +1,166 @@
+﻿<form [formGroup]="costbreakupForm" (ngSubmit)="save()" novalidate>
+    <div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableHead"><b>Cost Breakup Details</b></div>
+                <div class="divTableHead"></div>
+            </div>
+            <div class="divTableRow">
+                <font color="Red"> {{errorMessage}} </font>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Land</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="landSiteCost" /> {{projecttariffunit}}
+                    <span style="color: red;" *ngIf="landSiteCost.invalid && (landSiteCost.dirty || submitted)">
+                        <label *ngIf="landSiteCost.errors.required">
+                            Land Cost is required
+                        </label>
+                        <label *ngIf="landSiteCost.errors.pattern">
+                            Cost should be in digits and upto 2 decimal places only
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Modules</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="solarModules" /> {{projecttariffunit}}
+                    <span style="color: red;" *ngIf="solarModules.invalid && (solarModules.dirty || submitted)">
+                        <label *ngIf="solarModules.errors.pattern">
+                            Cost should be in digits and upto 2 decimal places only
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <!--<div class="divTableRow">
+        <div class="divTableCell">Civil & General Works</div>
+        <div class="divTableCell_2"><input type="text" formControlName="civilGeneralWorks" /></div>
+    </div>-->
+            <div class="divTableRow_2">
+                <div class="divTableCell">Mounting Structures</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="moduleMountStruct" /> {{projecttariffunit}}
+                    <span style="color: red;" *ngIf="moduleMountStruct.invalid && (moduleMountStruct.dirty || submitted)">
+                        <label *ngIf="moduleMountStruct.errors.pattern">
+                            Cost should be in digits and upto 2 decimal places only
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Invertors</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="powerCondUnit" /> {{projecttariffunit}}
+                    <span style="color: red;" *ngIf="powerCondUnit.invalid && (powerCondUnit.dirty || submitted)">
+                        <label *ngIf="powerCondUnit.errors.pattern">
+                            Cost should be in digits and upto 2 decimal places only
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Power Evacuation/Transmission Line</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="evacuationCost" /> {{projecttariffunit}}
+                    <span style="color: red;" *ngIf="evacuationCost.invalid && (evacuationCost.dirty || submitted)">
+                        <label *ngIf="evacuationCost.errors.pattern">
+                            Cost should be in digits and upto 2 decimal places only
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <!--<div class="divTableRow">
+        <div class="divTableCell">Transmission system interconnection point</div>
+        <div class="divTableCell_2"><input type="text" formControlName="transmissionsys" /></div>
+    </div>-->
+            <div class="divTableRow_2">
+                <div class="divTableCell">Priliminary</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="preoperativeexp" /> {{projecttariffunit}}
+                    <span style="color: red;" *ngIf="preoperativeexp.invalid && (preoperativeexp.dirty || submitted)">
+                        <label *ngIf="preoperativeexp.errors.pattern">
+                            Cost should be in digits and upto 2 decimal places only
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Contingency</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="contingency" /> {{projecttariffunit}}
+                    <span style="color: red;" *ngIf="contingency.invalid && (contingency.dirty || submitted)">
+                        <label *ngIf="contingency.errors.pattern">
+                            Cost should be in digits and upto 2 decimal places only
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Interest During Construction</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="idc" /> {{projecttariffunit}}
+                    <span style="color: red;" *ngIf="idc.invalid && (idc.dirty || submitted)">
+                        <label *ngIf="idc.errors.pattern">
+                            Cost should be in digits and upto 2 decimal places only
+                        </label>
+                    </span>
+                </div>
+            </div>
+       
+            <div class="divTableRow_2">
+                <div class="divTableCell">Working Capital</div>
+                <div class="divTableCell_2"><input type="text"  formControlName="workingcapital"/> {{projecttariffunit}}
+                    <span style="color: red;" *ngIf="idc.invalid && (idc.dirty || submitted)">
+                        <label *ngIf="idc.errors.pattern">
+                            Cost should be in digits and upto 2 decimal places only
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Financing Cost</div>
+                <div class="divTableCell_2"><input type="text" formControlName="financingCost"/> {{projecttariffunit}}
+                    <span style="color: red;" *ngIf="financingCost.invalid && (financingCost.dirty || submitted)">
+                        <label *ngIf="financingCost.errors.pattern">
+                            Cost should be in digits and upto 2 decimal places only
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">DSRA</div>
+                <div class="divTableCell_2"><input type="text" formControlName="dsra"/> {{projecttariffunit}}
+                    <span style="color: red;" *ngIf="dsra.invalid && (dsra.dirty || submitted)">
+                        <label *ngIf="dsra.errors.pattern">
+                            Cost should be in digits and upto 2 decimal places only
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">Total cost</div>
+                <div class="divTableCell_2"><input type="text" formControlName="totalCost" value=' {{ getTotalcost() }}'/> {{projecttariffunit}}</div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell"></div>
+                <div class="divTableCell_2">
+                    <input type="submit"
+                           class="btn btn-primary"
+                           value="Save" />&nbsp;<input type="button" class="btn btn-warning" value="Back" (click)="cancel()" />
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">      </div>
+                <div class="divTableCell_2"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">    </div>
+                <div class="divTableCell_2"></div>
+            </div>
+
+        </div>
+    </div>
+</form>
+

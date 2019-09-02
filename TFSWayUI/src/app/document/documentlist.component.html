@@ -1,0 +1,128 @@
+﻿<div style="width:100%;margin-top:5px;"> <b>Group Name :</b>{{groupName}} &nbsp; &nbsp;  <i class="glyphicon glyphicon-arrow-right"></i> &nbsp; <b>Company Name :</b>{{companyName}} &nbsp; &nbsp;  <i class="glyphicon glyphicon-arrow-right"></i>  &nbsp; <b>Project Name :</b>{{projectName}} &nbsp; &nbsp;   </div>
+<div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableHead"><b>Project Document List</b></div>
+            <div class="divTableHead"></div>
+        </div>
+
+        <div class="divTableBody">
+            <div style="margin:20px;">
+
+                <button class="btn btn-success pull-right" (click)="addOther()" title="Add Other Document">
+                    <i class="glyphicon glyphicon-plus"></i>
+                </button>
+                <button class="btn btn-primary pull-left" (click)="addMaster()" title="Add MasterDocument">Add From Master Document</button>
+                <div *ngIf="documents.length > 0">
+                    <button class="btn btn-success btn-circle pull-right" (click)="ExportToExcel()" title="Export to Excel">
+                        <i class="glyphicon glyphicon-export"></i>
+                    </button>
+                    <button [disabled]="IsSelected" class="btn btn-success btn-circle pull-right" (click)="SendMail()" title="Send Mail">
+                        <i class="glyphicon glyphicon-envelope"></i>
+                    </button>
+                </div>
+                <ng-progress></ng-progress>
+                <div class="alert-danger">{{errorMessage}}</div>
+
+                <div class="input-group" *ngIf="documents.length > 0">
+                    <input type="text" class="form-control" name="search" [(ngModel)]="search"
+                           aria-describedby="basic-addon1">
+                    <span class="input-group-addon" id="basic-addon1">Search</span>
+
+                </div>
+
+                <div id="exportgrid">
+                    <table class="table table-bordered">
+                        <thead class="thead-inverse">
+                            <tr *ngIf="documents.length >0">
+                                <th>
+                                    Sr. No.
+                                    <span></span>
+                                </th>
+
+                                <th (click)="setOrder('documentName')">
+                                    Document Name
+                                    <span class="glyphicon sort-icon" *ngIf="order =='documentName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+                                <th (click)="setOrder('stage')">
+                                    Stage
+                                    <span class="glyphicon sort-icon" *ngIf="order =='stage'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <!--<th (click)="setOrder('isMaster')">
+                                    Master Document
+                                    <span class="glyphicon sort-icon" *ngIf="order =='isMaster'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>-->
+                                <th (click)="setOrder('completed')">
+                                    Completed
+                                    <span class="glyphicon sort-icon" *ngIf="order =='completed'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+                                <th>
+                                    Send Mail
+                                </th>
+
+                                <th *ngIf="isexporttoexcel">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr *ngFor="let document of documents| filter: search ;let i=index;">
+                                <td>{{i+1}} </td>
+                                <td>{{document.documentName}}</td>
+                                <td>{{document.stage}}</td>
+                                <!--<td>{{(document.filePath.length == 0) ? "Not Available" : "Available"}}</td>-->
+                                <td>{{(document.filePath == 'http://tfsapp1.westindia.cloudapp.azure.com/TfsWebApi/UploadFile/') ? "Not Available" : "Available"}}</td>
+                                <!--<td>{{document.isMaster}}</td>-->
+                                <td>{{document.completed}}</td>
+                                <td><input type="checkbox" [disabled]="document.filePath == 'http://tfsapp1.westindia.cloudapp.azure.com/TfsWebApi/UploadFile/'" (change)="onChange($event,document.documentID)" /></td>
+                                <!--<td><input type="checkbox" [disabled]="document.filePath.length == 0" (change)="onChange($event,document.documentID)" /></td>-->
+                                <td *ngIf="isexporttoexcel">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <i class="glyphicon glyphicon-trash pointer fa-lg"
+                                                   (click)="delete(document.documentID)" *ngIf="document.completed == 'Not Completed'"  title="Delete"></i>
+                                                &nbsp;
+                                            </td>
+                                            <td>
+                                                <i class="glyphicon glyphicon-edit pointer fa-lg" *ngIf="document.completed == 'Not Completed'" (click)="edit(document.documentID)" title="Edit"></i>
+                                                &nbsp;
+                                            </td>
+                                            <td>
+                                                <a href="{{document.filePath}}" target="_blank">
+                                                    <i *ngIf="document.filePath != 'http://tfsapp1.westindia.cloudapp.azure.com/TfsWebApi/UploadFile/' " class="glyphicon glyphicon-download pointer" title="download"></i>
+                                                    <!--<i *ngIf="document.filePath.length > 0" class="glyphicon glyphicon-download pointer" title="download"></i>-->
+                                                    &nbsp;
+                                                </a>
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr *ngIf="!documents || documents.length==0">
+                                <td colspan="7">Documents not available</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="divTableRow">
+                    <div class="divTableCell">      </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+                <div class="divTableRow">
+                    <div class="divTableCell">    </div>
+                    <div class="divTableCell_2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,61 @@
+﻿<form [formGroup]="agencyForm" (ngSubmit)="save()" novalidate>
+    <div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableHead"><b>{{title}} Master Agency</b></div>
+                <div class="divTableHead"></div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Agency Type</div>
+                <div class="divTableCell_2">
+                    <select palceholder="Select" formControlName="agencyType" style="width:160px;height:23px;">
+                        <option *ngFor="let key of keys" [value]="agencytype[key]">{{agencytype[key]}}</option>
+                    </select>
+                    <span style="color: red;" *ngIf="agencyType.invalid && (agencyType.dirty || submitted)">
+                        <label *ngIf="agencyType.errors.required">
+                            Agency Type is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Agency Name</div>
+                <div class="divTableCell_2"><input type="text" formControlName="agencyName" />
+                    <span style="color: red;" *ngIf="agencyName.invalid && (agencyName.dirty || submitted)">
+                        <label *ngIf="agencyName.errors.required">
+                             Agency Name is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Agency Address</div>
+                <div class="divTableCell_2"><textarea formControlName="agencyAddress" ></textarea>
+                    <span style="color: red;" *ngIf="agencyAddress.invalid && (agencyAddress.dirty || submitted)">
+                        <label *ngIf="agencyAddress.errors.required">
+                            Agency Address is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell"></div>
+                <div class="divTableCell_2">
+                    <input type="submit"
+                           class="btn btn-primary"
+                           value="Save" />&nbsp;<input type="button" class="btn btn-warning" value="Cancel" (click)="cancel()" />
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">      </div>
+                <div class="divTableCell_2"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">    </div>
+                <div class="divTableCell_2"></div>
+            </div>
+
+        </div>
+    </div>
+</form>

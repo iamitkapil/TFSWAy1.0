@@ -1,0 +1,277 @@
+﻿<div style="width:100%;margin-top:5px;"> <b>Group Name :</b>{{groupName}} &nbsp; &nbsp;  <i class="glyphicon glyphicon-arrow-right"></i> &nbsp; <b>Company Name :</b>{{companyName}} &nbsp; &nbsp;  <i class="glyphicon glyphicon-arrow-right"></i>  &nbsp; <b>Project Name :</b>{{projectName}} &nbsp; &nbsp;   </div>
+<form [formGroup]="tasktrackerForm" (ngSubmit)="save()" novalidate>
+    <div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;" *ngIf="AddMorePlan">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableHead"><b>{{title}} Task Tracker</b></div>
+                <div class="divTableHead"></div>
+            </div>
+
+            <div class="divTableRow_2" *ngIf="!IsEdit">
+                <div class="divTableCell">Task Source</div>
+                <div class="divTableCell_2">
+                    <select palceholder="Select" (change)="onTaskChange($event.target)" style="width:160px;height:23px;">
+                        <option value="Activity">Activity</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="divTableRow" *ngIf="!IsEdit">
+                <div class="divTableCell">Stage</div>
+                <div class="divTableCell_2">
+                    <select palceholder="Select" (change)="onStageChange($event.target)" formControlName="parentID" style="width:160px;height:23px;">
+                        <option *ngFor="let stage of stages" value={{stage.templateID}}>{{stage.activity}}</option>
+                    </select>
+                    <span style="color: red;" *ngIf="parentID.invalid && (parentID.dirty || submitted)">
+                        <label *ngIf="parentID.errors.required">
+                            Stage is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="divTableRow_2" *ngIf="!IsEdit">
+                <div class="divTableCell">Activities</div>
+                <div class="divTableCell_2">
+                    <select palceholder="Select" formControlName="activity" style="width:160px;height:23px;">
+                        <option *ngFor="let activity of activityList" value={{activity.activityID}}>{{activity.activity}}</option>
+                    </select>
+                    <span style="color: red;" *ngIf="activity.invalid && (activity.dirty || submitted)">
+                        <label *ngIf="activity.errors.required">
+                            Activity is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="divTableRow" *ngIf="!IsEdit">
+                <div class="divTableCell">Task</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="task" />
+                    <span style="color: red;" *ngIf="task.invalid && (task.dirty || submitted)">
+                        <label *ngIf="task.errors.required">
+                            Task is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <!--<div class="divTableRow_2">
+                <div class="divTableCell">Responsible</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="responsible" />
+                    <span style="color: red;" *ngIf="responsible.invalid && (responsible.dirty || submitted)">
+                        <label *ngIf="responsible.errors.required">
+                            Responsible is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Email ID</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="responsibleEmail" />
+                    <span style="color: red;" *ngIf="responsibleEmail.invalid && (responsibleEmail.dirty || submitted)">
+                        <label *ngIf="responsibleEmail.errors.required">
+                            Email is required
+                        </label>
+                    </span>
+                </div>
+            </div>-->
+
+            <div class="divTableRow_2" *ngIf="!IsEdit">
+                <div class="divTableCell">Planned Date of Completion</div>
+                <div class="divTableCell_2">
+                    <my-date-picker  name="EndDate" [options]="myDatePickerOptions" placeholder="select date"
+                                    (dateChanged)="onEndDateChanged($event)" formControlName="endDate" required></my-date-picker>
+
+                    <span style="color: red;" *ngIf="endDate.invalid && (endDate.dirty || submitted)">
+                        <label *ngIf="endDate.errors.required">
+                            Planned Date is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="divTableRow" *ngIf="IsEdit">
+                <div class="divTableCell">Status</div>
+                <div class="divTableCell_2">
+                    <select palceholder="Select" formControlName="status" style="width:160px;height:23px;">
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="divTableRow_2" *ngIf="IsEdit">
+                <div class="divTableCell">Completion Date</div>
+                <div class="divTableCell_2">
+                    <my-date-picker [disabled]="activeuserdesignation !='Admin'"  name="CompletionDate" [options]="myDatePickerOptions" placeholder="select date"
+                                    (dateChanged)="onEndDateChanged($event)" formControlName="complitionDate" required></my-date-picker>
+
+                    <span style="color: red;" *ngIf="complitionDate.invalid && (complitionDate.dirty || submitted)">
+                        <label *ngIf="complitionDate.errors.required">
+                            Completion Date is required
+                        </label>
+                        <label *ngIf="complitionDate.errors.endDatesCompareIssue">
+                            Completion Date can not less than End Date
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <!--<input type="hidden" formControlName="taskProjectPlanID" />-->
+            <div class="divTableRow_2">
+                <div class="divTableCell"></div>
+                <div class="divTableCell_2">
+                    <input type="submit"
+                           class="btn btn-primary"
+                           value="Save" />&nbsp;<input type="button" class="btn btn-warning" value="Reset" (click)="clear()" />
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">      </div>
+                <div class="divTableCell_2"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">    </div>
+                <div class="divTableCell_2"></div>
+            </div>
+
+        </div>
+    </div>
+</form>
+<div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableHead"><b>Activity and Task List</b></div>
+            <div class="divTableHead"></div>
+        </div>
+
+        <div class="divTableBody">
+            <div style="margin:20px;">
+                <div *ngIf="projectplans.length > 0">
+                    <button class="btn btn-success btn-circle pull-right" (click)="add()" title="Add Task">
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </button>
+                    <button class="btn btn-success btn-circle pull-right" (click)="ExportToExcel()" title="Export to Excel">
+                        <i class="glyphicon glyphicon-export"></i>
+                    </button>
+                </div>
+                <ng-progress></ng-progress>
+                <div class="alert-danger">{{errorMessage}}</div>
+
+                <div class="input-group" *ngIf="projectplans.length > 0">
+                    <input type="text" class="form-control" name="search" [(ngModel)]="search"
+                           aria-describedby="basic-addon1">
+                    <span class="input-group-addon" id="basic-addon1">Search</span>
+
+                </div>
+
+                <div id="exportgrid">
+                    <table class="table table-bordered">
+                        <thead class="thead-inverse">
+                            <tr *ngIf="projectplans.length >0">
+                                <th>
+                                    Sr. No.
+                                    <span></span>
+                                </th>
+                                <th>
+                                    Activities and Sub Activities(Task)
+                                </th>
+                                <th>
+                                    Dependency
+                                </th>
+
+
+                                <th>
+                                    End Date
+                                </th>
+                                <th>
+                                    Completed On
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+
+
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr *ngFor="let projectplan of projectplans| filter: search">
+
+                                <td valign="top">{{ (projectplan.task==null)? projectplan.srNo:projectplan.task }}</td>
+                                <td valign="top" [ngClass]="{'font-bold': projectplan.parentID == 0 ,'font-task': projectplan.task != null}">{{projectplan.activity}}</td>
+                                <td valign="top">{{projectplan.dependency}}</td>
+                                <td valign="top">{{projectplan.endDate | date}}</td>
+                                <td valign="top">{{projectplan.complitionDate | date}}</td>
+                                <td valign="top">{{projectplan.status}}</td>
+                                <td style="width: 70px;">
+                                    <i class="glyphicon glyphicon-edit pointer fa-lg" *ngIf="projectplan.parentID != 0 && projectplan.status !='Completed'"
+                                       (click)="edit(projectplan)" title="Edit"></i>
+                                    <!--<i class="glyphicon glyphicon-trash pointer fa-lg"*ngIf="projectplan.parentID != 0"
+                                       (click)="delete(projectplan.projectPlanID)" title="Delete"></i>-->
+                                </td>
+                            </tr>
+                            <tr *ngIf="!projectplans || projectplans.length==0">
+                                <td colspan="7">Project Activity not available</td>
+                            </tr>
+
+                        </tbody>
+                        <thead>
+                            <tr *ngIf="moms.length >0">
+                                <th style="background-color:white;font-weight:initial;">
+                                    14
+                                    <span></span>
+                                </th>
+                                <th style="background-color:white">
+                                    MOM Task
+                                </th>
+                                <th style="background-color:white">
+
+                                </th>
+
+                                <th style="background-color:white">
+
+                                </th>
+
+
+                                <th style="background-color:white">
+
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let mom of moms| filter: search;let i=index">
+                                <td>14.{{i+1}} </td>
+                                <td valign="top">{{mom.minutes}}</td>
+                                <td></td>
+                                <td valign="top">{{mom.meetingDate | date :'dd/MMM/yyyy'}}</td>
+                                <td valign="top">{{mom.taskComplitionDate | date :'dd/MMM/yyyy'}}</td>
+                                <td valign="top">{{mom.status}}</td>
+                                <td style="width: 70px;">
+                                    <i class="glyphicon glyphicon-edit pointer fa-lg" *ngIf="mom.mOMId != 0 && mom.status!='Completed'"
+                                       (click)="editMOM(mom)" title="Edit"></i>
+                                    <!--<i class="glyphicon glyphicon-trash pointer fa-lg"*ngIf="mom.mOMId != 0"
+                                       (click)="deleteMOM(mom.momId)" title="Delete"></i>-->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="divTableRow">
+    <div class="divTableCell">      </div>
+    <div class="divTableCell_2"></div>
+</div>
+<div class="divTableRow">
+    <div class="divTableCell">    </div>
+    <div class="divTableCell_2"></div>
+</div>

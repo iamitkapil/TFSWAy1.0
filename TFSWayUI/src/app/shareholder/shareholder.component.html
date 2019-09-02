@@ -1,0 +1,120 @@
+﻿<form [formGroup]="shareholderForm" (ngSubmit)="save()" novalidate>
+    <div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableHead"><b>{{title}} Shareholder</b></div>
+                <div class="divTableHead"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Type</div>
+                <div class="divTableCell_2">
+                    <select palceholder="Select" (change)="onTypeChange($event.target.value)" formControlName="shareholderType" style="width:160px;height:23px;">
+                        <option value="Company">Company</option>
+                        <option value="Promoter">Promoter</option>
+                        <option value="Others">Others</option>
+                    </select>
+                    <span style="color: red;" *ngIf="shareholderType.invalid && (shareholderType.dirty || submitted)">
+                        <label *ngIf="shareholderType.errors.required">
+                            Shareholder Type is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow_2" *ngIf="showPromoters">
+                <div class="divTableCell">Promoter</div>
+                <div class="divTableCell_2">
+                    <select palceholder="Select" style="width:160px;height:23px;" formControlName="shareholderPromoterId">
+                        <option *ngFor="let promoter of promoters" value={{promoter.promoterId}}>{{promoter.name}}</option>
+                    </select>
+                    <span style="color: red;" *ngIf="shareholderPromoterId.invalid && (shareholderPromoterId.dirty || submitted)">
+                        <label *ngIf="shareholderPromoterId.errors.required">
+                            Promoter is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Name</div>
+                <div class="divTableCell_2"> <input type="text" formControlName="name" [(ngModel)]=query (keyup)=filter($event) />
+                    <div class="suggestions" *ngIf="filteredList.length > 0 && query.length>2">
+                        <ul *ngFor="let item of filteredList;let idx=index">
+                            <li [class.complete-selected]="idx == selectedIdx">
+                                <a (click)="select(item)">{{item.name}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <span style="color: red;" *ngIf="name.invalid && (name.dirty || submitted)">
+                        <label *ngIf="name.errors.required">
+                            Shareholder Name is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">No. of shares</div>
+                <div class="divTableCell_2"><input type="text" formControlName="share" />
+                    <span style="color: red;" *ngIf="share.invalid && (share.dirty || submitted)">
+                        <!--<label *ngIf="share.errors.required">
+                            No. of shares is required
+                        </label>-->
+                        <label *ngIf="share.errors.pattern">
+                            No. of shares should be in digits only
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Face Value</div>
+                <div class="divTableCell_2"><input type="text" formControlName="faceValue" />
+                    <span style="color: red;" *ngIf="faceValue.invalid && (faceValue.dirty || submitted)">
+                        <!--<label *ngIf="faceValue.errors.required">
+                            Face Value is required
+                        </label>-->
+                        <label *ngIf="faceValue.errors.pattern">
+                            Face Value should be in digits and upto 2 decimal places only
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Percentage of shareholding</div>
+                <div class="divTableCell_2"><input type="text" formControlName="percentage" />
+                    <span style="color: red;" *ngIf="percentage.invalid && (percentage.dirty || submitted)">
+                        <!--<label *ngIf="percentage.errors.required">
+                            Percentage of shareholding required
+                        </label>-->
+                        <label *ngIf="percentage.errors.pattern">
+                            Percentage should be in digits and upto 2 decimal places only
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <!--<div class="divTableRow">
+                <div class="divTableCell">Do you want to add it as Main Shareholder ?</div>
+                <div class="divTableCell_2">
+                    <input type="checkbox" (change)="onCheckboxChange($event.target.checked)" formControlName="chkShareholder" />
+                </div>
+            </div>
+            <input type="hidden" formControlName="isMainShareholder" />-->
+
+            <div class="divTableRow_2">
+                <div class="divTableCell"></div>
+                <div class="divTableCell_2">
+                    <input type="submit"
+                           class="btn btn-primary"
+                           value="Save" />&nbsp;<input type="button" class="btn btn-warning" value="Cancel" (click)="cancel()" />
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">      </div>
+                <div class="divTableCell_2"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">    </div>
+                <div class="divTableCell_2"></div>
+            </div>
+
+        </div>
+    </div>
+</form>

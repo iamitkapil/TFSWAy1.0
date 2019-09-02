@@ -1,0 +1,250 @@
+﻿<div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableHead"><b>View Teaser</b></div>
+        </div>
+    </div>
+    <div class="divTableBody">
+        <div style="margin:20px;">
+            <div id="exportgrid">
+                <button class="btn btn-success btn-circle pull-right" (click)="ExportToMSWord()" title="Export to MSWord">
+                    <i class="glyphicon glyphicon-print"></i>
+                </button>
+                <table width="100%" border="0" style="text-align:center">
+                    <tr>
+                        <td><b>{{objProject?.nameoftheCompany}}</b></td>
+                    </tr>
+                    <tr>
+                        <td><i>(Developed by {{objProject?.groupName}})</i></td>
+                    </tr>
+                </table>
+                <br />
+                <br />
+                <table width="100%" border="1" cellpadding="4" cellspacing="4">
+                    <tr>
+                        <td width="22%">Name of the Company</td>
+                        <td>{{objProject?.nameoftheCompany}}</td>
+                    </tr>
+                    <tr>
+                        <td>Registered Office</td>
+                        <td>{{objProject?.officeAddress}}</td>
+                    </tr>
+                    <tr>
+                        <td>Incorporation</td>
+                        <td>{{objProject?.incorporationDate | date: 'dd/MMM/yyyy'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Group</td>
+                        <td>{{objProject?.teaserModel?.teaser?.group}}</td>
+                    </tr>
+                    <tr>
+                        <td>Promoters</td>
+                        <td>{{objProject?.teaserModel?.promoter?.promoterName}} : {{objProject?.teaserModel?.teaser?.promoterDescription}}</td>
+                    </tr>
+                    <tr>
+                        <td>Board of Directors</td>
+                        <td>
+                            <table width="40%" border="1" style="border-color:#eeeeee" cellpadding="2" cellspacing="4">
+                                <tr>
+                                    <td width="22%">Name</td>
+                                </tr>
+                                <tr *ngFor="let director of objProject?.teaserModel?.directors">
+                                    <td>{{director.directorName}}</td>
+                                </tr>
+
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Shareholding Pattern</td>
+                        <td>
+                            <table width="100%" border="1" style="border-color:#eeeeee" cellpadding="2" cellspacing="4">
+                                <tr>
+                                    <td>Category</td>
+                                    <td>No. of shares</td>
+                                    <td>Share Capital</td>
+                                    <td>%</td>
+                                </tr>
+                                <tr *ngFor="let shareholder of objShareHolders">
+                                    <td>{{shareholder.shareHolderName}}</td>
+                                    <td>{{shareholder.noofShares}}</td>
+                                    <td>{{shareholder.facevalue * shareholder.noofShares}}</td>
+                                    <td>{{((shareholder.facevalue * shareholder.noofShares)/TotalShareCapital*100).toFixed(2)}}</td>
+                                </tr>
+                                <tr *ngIf="!objOthers || objOthers.length > 0">
+                                    <td>Others</td>
+                                    <td>{{NoofOthersTotalShare}}</td>
+                                    <td>{{TotalOthersShareCapital}}</td>
+                                    <td>{{OthersPercentageShare.toFixed(2)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <td>{{NoofTotalshares}}</td>
+                                    <td>{{TotalShareCapital}}</td>
+                                    <td>{{PercentageShare.toFixed(2)}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>External Credit Rating (Company)</td>
+                        <td>{{objProject?.creditCompRating}}</td>
+                    </tr>
+                    <tr>
+                        <td>Project</td>
+                        <td>
+                            <table width="100%" border="1" style="border-color:#eeeeee" cellpadding="2" cellspacing="4">
+                                <tr>
+                                    <td width="22%">Project Name</td>
+                                    <td>{{objProject?.projectName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Project Developer</td>
+                                    <td>-NA-</td>
+                                </tr>
+                                <tr>
+                                    <td>Project Capacity (AC)</td>
+                                    <td>{{objProject?.capacity_AC}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Project Capacity (DC)</td>
+                                    <td>{{objProject?.capacity_DC}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Plant Location</td>
+                                    <td>{{objProject?.plantLocation}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Plant Type</td>
+                                    <td>{{objProject?.planttype}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Technology</td>
+                                    <td>{{objProject?.technology}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Land Requirement</td>
+                                    <td>{{objProject?.requiredLand}}</td>
+                                </tr>
+                                <tr>
+                                    <td>EPC Contract</td>
+                                    <td>{{objProject?.epcContractor}}</td>
+                                </tr>
+                                <tr>
+                                    <td>O&M Arrangement</td>
+                                    <td>{{objProject?.omContractor}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Total Project Cost</td>
+                                    <td>{{objProject?.totalCost}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Debt: Equity Ratio</td>
+                                    <td>{{objProject?.debtEquityRatio}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Term Loan Required</td>
+                                    <td>-NA-</td>
+                                </tr>
+                                <tr>
+                                    <td>Door to Door Tenure</td>
+                                    <td>{{objProject?.dtdTenure}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Repayment Period proposed</td>
+                                    <td>{{objProject?.repaymentPeriod}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Expected ROI</td>
+                                    <td>{{objProject?.teaserModel?.teaser?.expectedROI}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Selling Arrangement</td>
+                                    <td>{{objProject?.teaserModel?.teaser?.sellingArrangement}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Tarrif</td>
+                                    <td>{{objProject?.tariff}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Power Evacution</td>
+                                    <td>{{objProject?.teaserModel?.teaser?.powerEvacuation}}</td>
+                                </tr>
+                                <tr>
+                                    <td>PPA Signing Date</td>
+                                    <td>{{objProject?.ppaDate | date: 'dd/MMM/yyyy'}}</td>
+                                </tr>
+                                <tr>
+                                    <td>SCOD</td>
+                                    <td>{{objProject?.scod | date: 'dd/MMM/yyyy'}}</td>
+                                </tr>
+                                <tr>
+                                    <td>CUF</td>
+                                    <td>{{objProject?.cuf}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Proposed Security</td>
+                                    <td>{{objProject?.teaserModel?.teaser?.proposedSecurity}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Key Ratios</td>
+                        <td>
+                            <table width="100%" border="1" style="border-color:#eeeeee" cellpadding="2" cellspacing="4">
+                                <tr>
+                                    <td width="22%">IRR</td>
+                                    <td>{{objProject?.irr}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Min DSCR</td>
+                                    <td>{{objProject?.minDSCR}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Average DSCR</td>
+                                    <td>{{objProject?.avgDSCR}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Request</td>
+                        <td>{{objProject?.teaserModel?.teaser?.request}}</td>
+                    </tr>
+
+                </table>
+            </div>
+            <form [formGroup]="teaserForm" novalidate>
+                <div class="divTableRow">
+                    <div class="divTableCell">Remarks</div>
+                    <div class="divTableCell_2">
+                        <textarea formControlName="remarks"></textarea>
+                        <span style="color: red;" *ngIf="remarks.invalid && (remarks.dirty || submitted)">
+                            <label *ngIf="remarks.errors.required">
+                                Remarks are required
+                            </label>
+                        </span>
+                    </div>
+                </div>
+
+                <div style="text-align:center;margin-top:20px;">
+                    <input type="button" class="btn btn-primary" value="Approve" (click)="save('Approved')" [disabled]="activeuserdesignation !='Admin' || Teasersubmitted" />
+                    <input type="button" class="btn btn-warning" value="Reject" (click)="save('Rejected')" [disabled]="activeuserdesignation !='Admin' || Teasersubmitted" />
+                    <input type="button" class="btn btn-primary" value="Return" (click)="cancel()" />
+                </div>
+            </form>
+            <div class="divTableRow">
+                <div class="divTableCell">      </div>
+                <div class="divTableCell_2"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">    </div>
+                <div class="divTableCell_2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

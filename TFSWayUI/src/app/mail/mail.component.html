@@ -1,0 +1,82 @@
+﻿<form [formGroup]="mailForm" (ngSubmit)="SendMail()" novalidate>
+    <div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableHead"><b>Send Mail</b></div>
+                <div class="divTableHead"></div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">To:</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="to" />
+                    <span style="color: red;" *ngIf="to.invalid && (to.dirty || submitted)">
+                        <label *ngIf="to.errors.required">
+                            Email is required
+                        </label>
+                        <label *ngIf="to.errors.email">
+                            Email is invalid
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">CC:</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="cc" />
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">BCC:</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="bcc" />
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Subject:</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="subject" />
+                    <span style="color: red;" *ngIf="subject.invalid && (subject.dirty || submitted)">
+                        <label *ngIf="subject.errors.required">
+                            Subject is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Attachment:</div>
+                <div class="divTableCell_2">
+                   {{strAttachement}}
+                </div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell"></div>
+                <div class="divTableCell_2">
+                    <textarea class="form-control" rows="10" formControlName="body"></textarea>
+                </div>
+            </div>
+
+
+            <div class="divTableRow_2">
+                <div class="divTableCell"></div>
+                <div class="divTableCell_2">
+                    <input type="submit"
+                           class="btn btn-primary"
+                           value="Send Mail" />
+                    <input type="button" class="btn btn-warning" value="Cancel" (click)="cancel()" />
+                </div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">      </div>
+                <div class="divTableCell_2"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">    </div>
+                <div class="divTableCell_2"></div>
+            </div>
+
+        </div>
+    </div>
+</form>

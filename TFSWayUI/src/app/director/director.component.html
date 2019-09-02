@@ -1,0 +1,149 @@
+﻿<form [formGroup]="directorForm" (ngSubmit)="save()" novalidate>
+    <div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableHead"><b>{{title}} Director</b></div>
+                <div class="divTableHead"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Type</div>
+                <div class="divTableCell_2">
+                    <select palceholder="Select" (change)="onChange($event.target.value)" formControlName="directorType" style="width:160px;height:23px;">
+                        <option value="Company">Company</option>
+                        <option value="Promoter">Promoter</option>
+                    </select>
+                    <span style="color: red;" *ngIf="directorType.invalid && (directorType.dirty || submitted)">
+                        <label *ngIf="directorType.errors.required">
+                            Director Type is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="divTableRow_2" *ngIf="showPromoters">
+                <div class="divTableCell">Promoter</div>
+                <div class="divTableCell_2">
+                    <select palceholder="Select" style="width:160px;height:23px;" formControlName="directorPromoterId">
+                        <option *ngFor="let promoter of promoters" value={{promoter.promoterId}}>{{promoter.name}}</option>
+                    </select>
+                    <span style="color: red;" *ngIf="directorPromoterId.invalid && (directorPromoterId.dirty || submitted)">
+                        <label *ngIf="directorPromoterId.errors.required">
+                            Promoter is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">Name</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="name" [(ngModel)]=query (keyup)=filter($event) />
+                    <div class="suggestions" *ngIf="filteredList.length > 0 && query.length>2">
+                        <ul *ngFor="let item of filteredList;let idx=index">
+                            <li [class.complete-selected]="idx == selectedIdx">
+                                <a (click)="select(item)">{{item.name}} , {{item.address}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <span style="color: red;" *ngIf="name.invalid && (name.dirty || submitted)">
+                        <label *ngIf="name.errors.required">
+                            Director Name is required
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Address</div>
+                <div class="divTableCell_2">
+                    <textarea  formControlName="address" ></textarea>
+                    <!--<span style="color: red;" *ngIf="address.invalid && (address.dirty || submitted)">
+                        <label *ngIf="address.errors.required">
+                            Director Address is required
+                        </label>
+                    </span>-->
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">DIN</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="din" />
+                    <!--<span style="color: red;" *ngIf="din.invalid && (din.dirty || submitted)">
+                        <label *ngIf="din.errors.required">
+                            DIN is required
+                        </label>
+                    </span>-->
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">PAN</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="pan" />
+                    <!--<span style="color: red;" *ngIf="pan.invalid && (pan.dirty || submitted)">
+                        <label *ngIf="pan.errors.required">
+                            PAN is required
+                        </label>
+                    </span>-->
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Qualification</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="qualification" />
+                    <!--<span style="color: red;" *ngIf="qualification.invalid && (qualification.dirty || submitted)">
+                        <label *ngIf="qualification.errors.required">
+                            Qualification is required
+                        </label>
+                    </span>-->
+                </div>
+            </div>
+            <div class="divTableRow_2">
+                <div class="divTableCell">Experience in Relevant sector</div>
+                <div class="divTableCell_2">
+                    <textarea formControlName="expRelSector" ></textarea>
+                    <!--<span style="color: red;" *ngIf="expRelSector.invalid && (expRelSector.dirty || submitted)">
+                        <label *ngIf="expRelSector.errors.required">
+                            Experience is required
+                        </label>
+                    </span>-->
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">Shareholding in the company</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="compSharehold" />
+                    <!--<span style="color: red;" *ngIf="compSharehold.invalid && (compSharehold.dirty || submitted)">
+                        <label *ngIf="compSharehold.errors.required">
+                            Shareholding is required
+                        </label>
+                    </span>-->
+                </div>
+            </div>
+
+            <!--<div class="divTableRow_2">
+                <div class="divTableCell">Do you want to add it as Main Director ?</div>
+                <div class="divTableCell_2">
+                    <input type="checkbox" (change)="onCheckboxChange($event.target.checked)" formControlName="chkDirector" />
+                </div>
+            </div>
+            <input type="hidden" formControlName="isMainDirector" />-->
+
+            <div class="divTableRow">
+                <div class="divTableCell"></div>
+                <div class="divTableCell_2">
+                    <input type="submit"
+                           class="btn btn-primary"
+                           value="Save" />&nbsp;<input type="button" class="btn btn-warning" value="Cancel" (click)="cancel()" />
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">      </div>
+                <div class="divTableCell_2"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">    </div>
+                <div class="divTableCell_2"></div>
+            </div>
+
+        </div>
+    </div>
+</form>

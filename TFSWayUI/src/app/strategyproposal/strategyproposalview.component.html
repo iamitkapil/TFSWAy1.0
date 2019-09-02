@@ -1,0 +1,268 @@
+﻿<div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableHead"><b>Add Strategy Proposal</b></div>
+        </div>
+    </div>
+    <div class="divTableBody">
+        <div style="margin:20px;">
+            <div id="exportgrid">
+                <button class="btn btn-success btn-circle pull-right" (click)="ExportToMSWord()" title="Export to MSWord">
+                    <i class="glyphicon glyphicon-print"></i>
+                </button>
+                <table width="100%" border="0" style="text-align:center">
+                    <tr>
+                        <td><b>STRATEGIC DOCUMENT</b></td>
+                    </tr>
+                    <tr>
+                        <td><i>{{project?.projectGroup}}</i></td>
+                    </tr>
+                </table>
+                <br />
+                <br />
+                <table width="100%" border="0" style="text-align:center">
+                    <tr>
+                        <td><b><u>Project Brief</u></b></td>
+                    </tr>
+                </table>
+                <br />
+                <br />
+                <table width="100%" border="1">
+                    <tr>
+                        <td width="30%">Project</td>
+                        <td>{{project?.projectName}}</td>
+                    </tr>
+                    <tr>
+                        <td>Capacity (AC:DC)</td>
+                        <td>{{project?.projectCapacityAC}} : {{project?.projectCapacityDC}}</td>
+                    </tr>
+                    <tr>
+                        <td>Location</td>
+                        <td>{{project?.projectLocation}}</td>
+                    </tr>
+                    <tr>
+                        <td>Total Cost</td>
+                        <td>{{project?.projectTotalCost}}</td>
+                    </tr>
+                    <tr>
+                        <td>Proposed Equity Structure</td>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td>Equity :</td>
+                                    <td>{{project?.projectEquity}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Debt :</td>
+                                    <td>{{project?.projectDebt}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Financial Ratio</td>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td>IRR :</td>
+                                    <td>{{project?.projectIRR}}</td>
+                                </tr>
+                                <tr>
+                                    <td>DSCR :</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>Average : {{project?.projectAvgDSCR}}</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>Minimum : {{project?.projectMinDSCR}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <br />
+                <table width="100%" border="0" style="text-align:center">
+                    <tr>
+                        <td><b><u>PPA Details</u></b></td>
+                    </tr>
+                </table>
+                <br />
+                <br />
+                <table width="100%" border="1">
+                    <tr>
+                        <td width="30%">DISCOM</td>
+                        <td>{{project?.projectDiscom}}</td>
+                    </tr>
+                    <tr>
+                        <td>Tarrif</td>
+                        <td>{{project?.projectTarrif}}</td>
+                    </tr>
+                    <tr>
+                        <td>SCOD</td>
+                        <td>{{project?.projectSCOD  | date: 'dd/MMM/yyyy' }}</td>
+                    </tr>
+                    <tr>
+                        <td>Key Terms</td>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td>Termination Clause : </td>
+                                    <td>{{project?.strategyProposal?.ppaTerminationClause}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Liquidated Damages : </td>
+                                    <td>{{project?.strategyProposal?.ppaLiquidatedDamages}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Payment Mechanism : </td>
+                                    <td>{{project?.strategyProposal?.ppaPaymentmechanism}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Others : </td>
+                                    <td>{{project?.strategyProposal?.ppaOthers}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+                <br />
+                <br />
+                <table width="100%" border="0" style="text-align:center">
+                    <tr>
+                        <td><b><u>Group Profile :</u></b></td>
+                    </tr>
+                </table>
+                <br />
+                <br />
+                <table width="100%" border="1">
+                    <tr>
+                        <td width="30%">Experience in Relevant Sector</td>
+                        <td>{{project?.strategyProposal?.experienceinRelSec}}</td>
+                    </tr>
+                    <tr>
+                        <td>Financial Strength</td>
+                        <td>{{project?.strategyProposal?.financialStrenth}}</td>
+                    </tr>
+                    <tr>
+                        <td>Credit Rating</td>
+                        <td>{{project?.projectCreditRating}}</td>
+                    </tr>
+                    <tr>
+                        <td>Indicative Equity Arrangement</td>
+                        <td>{{project?.strategyProposal?.indicativeEquityArrangement}}</td>
+                    </tr>
+                    <tr>
+                        <td>previous Relation with Lender (if any)</td>
+                        <td>{{project?.strategyProposal?.prevRelationwithLender}}</td>
+                    </tr>
+                </table>
+                <br />
+                <br />
+                <table width="100%" border="0" style="text-align:center">
+                    <tr>
+                        <td><b><u>Promoter's Expectation:</u></b></td>
+                    </tr>
+                </table>
+                <br />
+                <br />
+                <table width="100%" border="1">
+                    <tr>
+                        <td width="30%">Tenure</td>
+                        <td>{{project?.strategyProposal?.tenure}}</td>
+                    </tr>
+                    <tr>
+                        <td>Rate of Intrest</td>
+                        <td>{{project?.strategyProposal?.roi}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Specific Terms & Conditions</td>
+                        <td>
+                            <table>{{project?.strategyProposal?.termsAndConditions}}</table>
+                        </td>
+                    </tr>
+
+                </table>
+
+                <br />
+                <br />
+                <table width="100%" border="0" style="text-align:center">
+                    <tr>
+                        <td><b><u>Policy Compliance with institutions:</u></b></td>
+                    </tr>
+                </table>
+                <br />
+                <br />
+                <table width="100%" border="1">
+                    <tr>
+                        <td width="30%">Power Finance with Corporation</td>
+                        <td>{{project?.strategyProposal?.powerFinCorp}}</td>
+                    </tr>
+                    <tr>
+                        <td>Rural Electrification Corporation</td>
+                        <td>{{project?.strategyProposal?.ruralElectrificationCorp}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Others</td>
+                        <td>
+                            <table>{{project?.strategyProposal?.policyCompOthers}}</table>
+                        </td>
+                    </tr>
+
+                </table>
+                <br />
+                <br />
+                <table width="100%" border="0" style="text-align:center">
+                    <tr>
+                        <td><b><u>Strategy to be Adopted:</u></b></td>
+                    </tr>
+                </table>
+                <br />
+                <br />
+                <table width="100%" border="1">
+                    <tr>
+                        {{project?.strategyProposal?.strategyAdopted}}
+                    </tr>
+
+
+                </table>
+            </div>
+            <form [formGroup]="strategyProposalForm" novalidate>
+                <div class="divTableRow">
+                    <div class="divTableCell">Remarks</div>
+                    <div class="divTableCell_2">
+                        <textarea formControlName="remarks"></textarea>
+                        <span style="color: red;" *ngIf="remarks.invalid && (remarks.dirty || submitted)">
+                            <label *ngIf="remarks.errors.required">
+                                Remarks are required
+                            </label>
+                        </span>
+                    </div>
+                </div>
+
+                <div style="text-align:center;margin-top:20px;">
+                    <input type="button" class="btn btn-primary" value="Approve" (click)="save('Approved')" [disabled]="activeuserdesignation !='Admin' || StrategyProposalsubmitted" />
+                    <input type="button" class="btn btn-warning" value="Reject" (click)="save('Rejected')" [disabled]="activeuserdesignation !='Admin' || StrategyProposalsubmitted" />
+                    <input type="button" class="btn btn-primary" value="Return" (click)="cancel()" />
+                </div>
+            </form>
+
+            <div class="divTableRow">
+                <div class="divTableCell">      </div>
+                <div class="divTableCell_2"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">    </div>
+                <div class="divTableCell_2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,76 @@
+﻿<form [formGroup]="customerForm" (ngSubmit)="save()" novalidate>
+    <div class="divTable" style="width:100%;border: 1px solid #000;margin-top:17px;">
+        <div class="divTableBody">
+
+            <div class="divTableRow">
+                <div class="divTableHead"><b>Customer</b></div>
+                <div class="divTableHead"></div>
+            </div>
+
+
+            <div class="divTableRow">
+                <div class="divTableCell"> First Name</div>
+                <div class="divTableCell_2">
+                    <input type="text" class="validate filter-input" formControlName="customerFirstName" [(ngModel)]=query (keyup)=filter($event) />
+                    <div class="suggestions" *ngIf="filteredList.length > 0 && query.length>2">
+                        <ul *ngFor="let item of filteredList;let idx=index">
+                            <li [class.complete-selected]="idx == selectedIdx">
+                                <a (click)="select(item)">{{item.customerFirstName}} , {{item.customerPhone}},{{item.customerEmail}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">Last Name</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="customerLastName">
+                </div>
+
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell"> Phone#</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="customerPhone">
+                </div>
+            </div>
+
+            <div class="divTableRow_2">
+                <div class="divTableCell">  Email</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="customerEmail">
+                </div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">Date of Birth</div>
+                <div class="divTableCell_2">
+                    <input type="text" formControlName="customerDateofBirth">
+                </div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell"></div>
+                <div class="divTableCell_2">
+                    <input type="submit"
+                           class="btn btn-primary"
+                           value="Save" />&nbsp;<input type="button" class="btn btn-warning" value="Cancel" (click)="cancel()" />
+                </div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">      </div>
+                <div class="divTableCell_2"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">    </div>
+                <div class="divTableCell_2"></div>
+            </div>
+
+
+        </div>
+    </div>
+
+</form>
